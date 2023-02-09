@@ -1,0 +1,125 @@
+<div id="collections-search-container">
+    <div class="oj-flex max-width" tabindex="-1">
+        <div id="ifrs9-close" class="oj-flex-item oj-lg-12 close-button">
+            <div class="oj-flex-item oj-lg-11" align="right">
+                <a href="javascript:void(0);" style="color: #045fab;" data-bind="click: close, 
+                            event: {keypress: closeOnKeyPress}">Close</a>
+            </div>
+            <div class="oj-flex-item oj-lg-12" align="center">
+                <h2>IFRS9</h2>
+            </div>
+        </div>
+        <div id = "ifrs9-search-criteria" style="background: #f5f7f5;height: 90%"  class="oj-flex-item oj-lg-2 criteria">
+            <div>
+                <div class="oj-flex oj-lg-12" align="center">
+                    <button id="createButton" style="align-self: start" href="javascript:void(0);" data-bind="click: openCreateRatesDialogView, event: {keypress: openCreateRatesDialogViewOnKeyPress},
+                attr: {title: 'Dialog View'}">Create SS Rate</button>
+                </div>
+            </div>
+            <hr>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-12" align="left">
+                    <h2>Search Criteria</h2>
+                </div>     
+            </div>
+            <hr>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-7" align="left">
+                    <h2>Effective date</h2>
+                </div>
+                <div class="oj-flex-item oj-lg-5" align="left" style="align-self: center">
+                    <input type="date"  id="effective-date" name="trip-start"
+                           min="2020-01-01" max="2100-12-31"/> 
+                </div>
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-7" align="left">
+                    <h2>Status</h2>
+                </div>
+                <div class="oj-flex-item oj-lg-5" style="align-self: center" align="left">
+                    <select data-bind="options: availiableStatuses,
+                                                      optionsText: 'status',
+                                                      value: selectedStatus,
+                                                      disable: $root.isReadOnly," style="width: 90%">                                                
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-5">
+                    <div class="padding10px">&nbsp;</div>
+                </div>
+                <div class="oj-flex oj-lg-2" align="center">
+                    <button id="searchButton" style="align-self: start" href="javascript:void(0);" data-bind="click: $root.ratesSearch ">Search</button>
+                </div>
+                <div class="oj-flex-item oj-lg-5">
+                    <div class="padding10px">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ifrs9-search-results-container" style="color: #f5f7f5;height: 90%" class="oj-flex-item oj-lg-10 criteria">
+
+            <!-- ko if: recordsCount() ===  0   -->
+            <div class="oj-flex">
+                <div class="oj-flex-item lg-lg-12 text-align-center"><span data-bind="text: labelNoRecords" class="label-medium" id="no_records_found"></span></div>
+            </div> 
+            <!-- /ko -->
+
+            <div id="ifrs9-result" style="overflow-x: hidden; overflow-y: auto;height: inherit" class="oj-flex result">
+                <div class="width100">
+                    <div class="oj-flex close-button"  id="ifrs9-result-list">
+                        <div class="oj-flex-item oj-lg-12" style="color: #045fab;" align="left"><b>List of SS Rates</b></div>                          
+                    </div>
+                    <ul id="ifrs9-search-result" 
+                        data-bind="ojComponent: {
+                                          component: 'ojListView',
+                                          data: dataSource,
+                                          selectionMode: 'single',
+                                          item: {template: 'server_template'}}"></ul>
+                    <script type="text/html" id="server_template">
+                        <li label="IFRS9 Search Result Records">   
+                            <div class="oj-flex">
+                                <div class="oj-flex oj-lg-12">
+                                    <div class="collections-result-img-section" style="width: 20%"align="right">                                       
+                                        <span class="collections-account-number"><b>Code</b></span>
+                                        <input data-bind="textInput:maturityPeriod" style="width: 65%" readonly="readonly">
+                                    </div>
+                                    <div class="collections-result-img-section" style="width: 20%" align="right">
+                                        <span class="collections-account-number"><b>Days</b></span>
+                                        <input class="set_custom_width" data-bind="textInput:agingDays" style="width: 68%" readonly="readonly">
+                                    </div>
+                                    <div class="collections-result-img-section" style="width: 20%"align="right">
+                                        <span class="collections-account-number"><b>Effective Date</b></span>
+                                        <input class="set_custom_width" data-bind="textInput:effectiveDate" style="width: 50%" readonly="readonly">
+                                    </div>    
+                                    <div class="collections-result-img-section" style="width: 15%" align="right">
+                                        <span class="collections-account-number"><b>Rate (%)</b></span>
+                                        <input class="set_custom_width" data-bind="textInput:percentUI" style="width: 30%" readonly="readonly">
+                                    </div>
+                                    <div class="collections-result-img-section" style="width: 15%" align="right">
+                                        <span class="collections-account-number"><b>Status</b></span>
+                                        <input class="set_custom_width" data-bind="textInput:statusUI" style="width: 40%" readonly="readonly">
+                                    </div>
+                                    <div class="collections-result-img-section" style="width: 10%" align="right">
+                                        <div class="oj-button-label">
+                                            <oj-bind-if test="flag === true && status !== 2">
+                                                <button id="editButton" style="align-self: start" href="javascript:void(0);" data-bind="attr: {id: $data['effectiveDate']}, click: $root.openEditRatesDialogView, event: {keypress: $root.openEditRatesDialogViewOnKeyPress},
+                                                attr: {title: 'Dialog View'}">Edit</button>
+                                            </oj-bind-if>
+                                            <oj-bind-if test="flag === false || status === 2 ">
+                                                <button id="editButton" style="align-self: start" href="javascript:void(0);" data-bind="attr: {id: $data['effectiveDate']}, click: $root.openEditRatesDialogView, event: {keypress: $root.openEditRatesDialogViewOnKeyPress},
+                                                attr: {title: 'Dialog View'}" disabled>Edit</button>
+                                            </oj-bind-if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </li>    
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,14 @@
+{
+  "type" : "Cash",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment10011",
+  "internalStruct" : "cashInfo",
+  "fields" : [ {
+    "label" : "Receipt Date",
+    "datatype" : "date",
+    "fieldName" : "effectiveDate"
+  }, {
+    "label" : "Receipt No.",
+    "datatype" : "string",
+    "fieldName" : "receiptNo"
+  } ]
+}

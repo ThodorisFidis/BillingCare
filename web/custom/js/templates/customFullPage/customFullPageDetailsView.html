@@ -1,0 +1,284 @@
+<div id ="base-container-details">
+    <div id="collections-details-page">
+        <div id="searchResultsLinkDiv">
+            <a id="searchresultslink" tabindex="0" data-bind="click: renderSearchResultsPage,
+                                                     event: {keypress: renderSearchResultsPageOnKeyPress},
+                                                     text: '< '+util.getLocalizedValue(collectionDetails, 'SEARCH_RESULTS_LABEL')" ></a> 
+        </div>        
+        <br/><br/>
+
+        <div id='accountSummaryDiv'>
+            <div class="paddingbottomp2rem" data-bind="visible: accountName">
+                <a data-bind=" attr:{href:'/bc/index.html#accounts/' + accountId, 'account-id': accountId},
+                                click:openAccount,
+                                event: {keypress:openAccountOnKeypress}" target="_blank"  tabindex="0">
+                    <span data-bind="text:accountName"></span><img src="resources/images/newwindow.png" alt="<%= common.IMAGE_OPEN_NEW_WINDOW %>" width="16" height="16" style="margin-left: 8px"/>
+                </a>                
+            </div>
+            <div class="paddingbottomp2rem">
+                <span id="accountNumberSpan" data-bind="text: accountNumber"></span>
+            </div>
+            <div class="paddingbottomp2rem" data-bind="visible:isMultipleBillUnit">
+                <span id="billUnitsInCollectionSpan" data-bind="text:util.messageFormat(collectionDetails.BILL_UNITS_IN_COLLECTIONS_LABEL, [numberOfBUs()]);"></span>
+                &#160;&#160;&#160;&#160;
+                <span id="assignedToYouSpan" data-bind="text:assignedMessage"></span>
+            </div>
+        </div>
+        <br/><br/>
+        
+        <div id="collectionDetails">
+            <!--ko foreach: billUnitCollectionDetails-->
+            <div class="billUnitSection" data-bind="attr:{id: 'billunit-'+$index()}">
+                <div class="billUnitHeader" aria-label="billUnitHeader"  tabindex="0" data-bind="attr: {id:'billUnitHeader-'+$index()},
+                                                       click: $root.toggleBillUnitContent, 
+                                                       event: {keypress:$root.toggleBillUnitContentOnKeyPress}">
+                    <span class="oj-component-icon oj-collapsible-close-icon" data-bind="visible:!showDetails()"></span>
+                    <span class="oj-component-icon oj-collapsible-open-icon" data-bind="visible:showDetails()"></span>                  
+                    <span class="label-medium" data-bind="text: billUnitName, attr:{id: 'billUnitName-' + $index()}"></span>
+                    <!--ko if: $parent.isActionsMenuEnabled -->
+                    <div class="customerAssets-workspace-card-header-menu collections-action-menu-button"
+                         tabindex="0" title="<%=customerAssets.ACTION_MENU%>" 
+                         data-bind="click: $parent.showCollectionsActionMenu, clickBubble: false,
+                                    event: {keypress : $parent.onKeyPressShowCollectionsActionMenu, keypressBubble: false},
+                                    attr:{id: 'collectionsActionsMenuIcon_' + $index()}">
+                    </div>
+                    <!--/ko-->
+                </div>
+                <br/>
+                <div class="billUnitContent oj-flex" data-bind="attr:{id:'billUnitDetails-'+$index()},
+                                                        visible: showDetails">
+                    <div class="billUnitCollectionDetails oj-flex-item">
+                        <!--ko if:collectionsGroupId != null --> 
+                        <div id="collectionsGroupDiv" data-bind="attr:{id: 'collectionsGroupDiv_'+$index()}">
+                            <span data-bind="text: util.getLocalizedValue(collectionDetails, 'RESPONSIBLE_FOR_A_LABEL')"></span>
+                            <a tabindex="0" id="collectionsGroupDetailsLink" class="mouse_hover" data-bind="attr:{id: 'collectionsGroupDetailsLink_'+$index()}, text: util.getLocalizedValue(collectionDetails, 'COLLECTIONS_GROUP'),
+                                                                    click: $root.openCollectionsGroupDetails,
+                                                                    event: {keyup:$root.openCollectionsGroupDetailsOnKeyPress}"></a> 
+                        </div>
+                        <div id="popupWrapper">
+                            <div style="display:none" id="collectionsGroupDetailsPopup"
+                                 data-bind="ojComponent:{component: 'ojPopup', tail: 'simple', modality: 'modeless'}">
+                                <span id="groupNamelbl"><%=collections.GROUP_NAME%> : </span> <span id="groupName" data-bind="text: $parent.collectionsGroupName"></span>
+                                <br>
+                                <div id="memberInformation">
+                                    <table id="collectionsGroupDetailsTable" class="collections-GroupDetailsTable text_left_align" summary="Collections Group Information" title="Collections Group Information">
+                                        <thead>
+                                            <tr id="collectionsGroupDetailsTable-header-row">
+                                                <th id="memberColHeader" scope="col" ><%=collections.NAME%></th>
+                                                <th id="accountNumberColHeader" scope="col"><%=collections.ACCOUNT_NUMBER%></th>
+                                                <th id="billUnitNameColHeader" scope="col"><%=collections.BILL_UNIT%></th>
+                                                <th id="amountDueColHeader" scope="col"><%=collections.AMOUNT_DUE%></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: $root.collectionsGroupDetails">
+                                            <tr id = "memberInfo_" data-bind="attr:{'id':'memberInfo_' + $index()}">
+                                                <td id="memberName_" data-bind="attr:{'id': 'memberName_' + $index(), title:memberName}, text: memberName" scope="row"></td>
+                                                <td id="memberAccNumber_" data-bind="attr:{'id': 'memberAccNumber_' + $index(), title:memberAccNumber}, text: memberAccNumber" scope="row"></td>
+                                                <td id="memberBillUnitName_" data-bind="attr:{'id': 'memberBillUnitName_' + $index(), title:memberBillUnitName}, text: memberBillUnitName" scope="row"></td>
+                                                <td id="memberAmountDue_" data-bind="attr:{'id': 'memberAmountDue_' + $index(), title:memberAmountDue}, text: memberAmountDue" scope="row"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>   
+                                    <span id="totalLabel" data-bind="text: util.getLocalizedValue(collections, 'TOTAL')"> </span>
+                                    <span id="totalAmountDue" data-bind="attr:{title: $root.memberAmountDue}, text: $root.totalAmountDue"> </span>
+                                </div>
+                            </div>                            
+                        </div>
+                        <br/>
+                        <!--/ko-->
+                        <div class="css_row">
+                            <span class="css_cell_align_right" name="pastDueLabel" data-bind="text:util.getLocalizedValue(collectionDetails, 'PAST_DUE')"></span>
+                            <span class="css_cell pastDueValue">
+                                <span class="totalOverdueAmount" data-bind="text: pastDue"></span>
+                                &#160;
+                                <span data-bind="text: util.getResourceCode(currency)"></span>                        
+                            </span>                            
+                            <span class="css_cell" name="overDueLabel" data-bind="text: util.messageFormat(collectionDetails.OVERDUE_LABEL, [overdueDays]);"></span> 
+                        </div>
+                        <div class="css_row">
+                            <span class="css_cell_align_right" name="entryDateLabel" data-bind="text:util.getLocalizedValue(collectionDetails, 'ENTRY_DATE')"></span>
+                            <span class="css_cell" name="entryDateValue" data-bind="text:entryDate"></span>
+
+                            <!--ko if: numberOfTimesInCollections > 1-->
+                            <span class="css_cell" name="billUnitCollectionsCount" data-bind="text: util.messageFormat(collectionDetails.BILL_UNIT_IN_COLLECTIONS_COUNT_LABEL, [numberOfTimesInCollections]);"></span> 
+                            <!--/ko-->
+                            <!--ko if: numberOfTimesInCollections == 1-->
+                            <span class="css_cell" name="billUnitCollectionsCount" data-bind="text: util.getLocalizedValue(collectionDetails, 'BILL_UNIT_IN_COLLECTIONS_ONE_TIME_LABEL');"></span> 
+                            <!--/ko-->
+                        </div>
+                        <!--ko if: lastPaymentId-->
+                        <div class="css_row">
+                            <span class="css_cell_align_right" name="lastPaymentLabel" data-bind="text:util.getLocalizedValue(collectionDetails, 'LAST_PAYMENT')"></span>
+
+                            <span class="css_cell">
+                                <a tabindex="0" class="lastPaymentLink" name="lastPaymentLink"
+                                   data-bind="attr:{id: 'lastPaymentLink-' + $index()},
+                                            click: $root.openPaymentDetailsOverlay,
+                                            event: {keypress: $root.openPaymentDetailsOverlayEnterSpaceEventhandler},
+                                            text: lastPaymentAmount + ' on '+ lastPaymentDate"></a> 
+                            </span>
+                        </div>
+                        <!--/ko-->
+                        <div class="css_row">
+                            <span class="css_cell_align_right" name="minPaymentLabel" data-bind="text: util.getLocalizedValue(collections, 'MINIMUM_PAYMENT')"></span>
+                            <span class="css_cell">
+                                <span name="minPaymentValue" data-bind="text: minimumPayment"></span>                     
+                            </span>                            
+                        </div>
+                        <div class="css_row">
+                            <span class="css_cell_align_right" name="minPaymentLabel" data-bind="text: util.getLocalizedValue(collections, 'MINIMUM_PAYMENT')"></span>
+                            <span class="css_cell">
+                                <span name="minPaymentValue" data-bind="text: minimumPayment"></span>                     
+                            </span>                            
+                        </div>
+
+
+                        <div class="css_row">
+                            <span class="css_cell_align_right" name="assignedToLabel" data-bind="text:util.getLocalizedValue(collectionDetails, 'ASSIGNED_TO_LABEL')"></span>
+                            <span class="css_cell assignAgentSection" data-bind="attr: {id: 'assignAgentSection-'+$index()}">
+                                <!--ko if: !$parent.hasReassignPermission-->
+                                <span data-bind="text : collectionAgent"></span>
+                                <!--/ko-->                                
+                                <!--ko if: $parent.hasReassignPermission-->
+                                <select  aria-label="collectionAgentSelect" data-bind="ojComponent: {
+                                                        component: 'ojSelect',
+                                                        options: $parent.usersList,
+                                                        value: newAgent,
+                                                        optionChange: $parent.onAssigneeChange.bind($data),
+                                                        disabled: isAssignInProcess                                                                       
+                                                    }">
+                                </select>
+                                <!--/ko-->
+                            </span>
+                        </div>          
+                        <br/>
+                            <div id="collectionScenarioDiv" data-bind="attr:{id:'collectionScenarioDiv_' + $index()}">
+                            <div style="width: 60%;">
+                                <div id="scenarioHeader" data-bind="attr:{id:'scenarioHeader' + $index()}" class="scenarioHeader" style="float:left">
+                                    <span class="label-medium" data-bind="text:scenarioName"></span>
+                                </div>
+                                <div>
+                                    <div class="billUnit-card-edit-delete-icon">
+                                        <button class="addActionButton" title="Add Action" tabindex="0"
+                                                data-bind="attr: {id: 'collections_' + $index() + '_addAction'},
+                                                           click: $root.addAction, clickBubble: false,
+                                                           event: {keypress: $root.addActionOnKeyPress, keyup: $root.addActionOnKeyUp}, keypressBubble: false,
+                                                           authorize_command: {make: 'hide', resource: COLLECTIONS_RESOURCE, action: COLLECTIONS_ADD_ACTION}">
+                                        </button>
+                                        <!-- ko if:showEditIcon() -->
+                                        <a href="javascript:void(0);" title="Edit Action" 
+                                           data-bind="attr: {id : 'collections_'+$index()+'_editAction'},
+                                                      click: $root.editAction,
+                                                      event: {keypress: $root.editActionOnKeyPress},
+                                                      authorize_command:{make:'hide', resource: COLLECTIONS_RESOURCE, action: COLLECTIONS_MODIFY_ACTION}">
+                                            <img class="editAndDeleteIcon" src="resources/images/edit.png" alt="editAction"
+                                                 data-bind="attr: {id : 'collections_'+$index()+'_editActionImg'}"/>
+                                        </a>
+                                        <!-- /ko -->
+                                        <!-- ko if:!showEditIcon() -->
+                                        <img class="editAndDeleteIcon" style="opacity: 0.5" src="resources/images/edit.png" alt="editAction"
+                                             data-bind="attr:{id : 'collections_'+$index()+'_editActionDisabled'},
+                                             authorize_command:{make:'hide', resource: COLLECTIONS_RESOURCE, action: COLLECTIONS_MODIFY_ACTION}"/>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="scenarioActions" name="scenarioActions" data-bind="attr:{id:'scenarioActions' + $index()}">
+                                <table summary="billUnitActions" 
+                                       data-bind="attr:{id:'billUnitActionsTable-'+$index(),index:$index() },click:$root.enableEditIcon,
+                                                ojComponent: {
+                                                    component: 'ojTable',
+                                                    data: billUnitActionsDatasource, 
+                                                    columnsDefault: {sortable: 'none'}, 
+                                                    display :'grid',
+                                                    verticalGridVisible  :'disabled',
+                                                    scrollPolicy :'auto',
+                                                    selectionMode :{'row': 'single'},
+                                                    editMode :'none',
+                                                    columns: $root.actionsColumnsConfig,
+                                                    rootAttributes: {'style':'width: 60%; height: 100%; margin-left:1%'}}">
+                                </table>
+                                <script type="text/html" id="action_link_template">
+                                    <td>
+                                        <a href="javascript:void(0)" tabindex="0" data-bind="attr: {id: $data.actionId}, text: $data.action,
+                                           click: $root.openActionHistoryPopup, clickBubble: false,
+                                           event: {keypress: $root.openActionHistoryPopupOnKeypress, keypressBubble: false}">
+                                        </a>
+                                    </td>
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="billUnitNotes oj-flex-item" data-bind="attr:{id:'billUnitNotes-'+$index()}">
+                            <div id="collectionsDetailsNotesHeader">
+                                <span id="collectionsNotesHeaderContent" class="label-medium" data-bind="text : util.getLocalizedValue(homeTab , 'NOTES')"></span>
+                            </div>
+                            <!--ko if: hasNotes()-->
+                            <div id="simple-notes-container" data-bind="notes_view: 'update'"></div>
+                            <!--/ko-->
+
+                            <!--ko if: !hasNotes()-->
+                            <div id="simple-notes-container" data-bind="notes_view: 'create'"></div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+                <!--/ko-->
+                <div id="popupWrapper">
+                    <div style="display:none" id="collectionsActionHistoryPopup" 
+                         data-bind="ojComponent:{
+                            component: 'ojPopup',
+                            tail: 'simple',
+                            modality: 'modeless'}">
+                        <table summary="actionHistory" id="actionHistoryTable" 
+                               data-bind="ojComponent: {
+                               component: 'ojTable', 
+                               data: actionHistoryDatasource, 
+                               columnsDefault: {sortable: 'none'},
+                               display :'grid',
+                               verticalGridVisible  :'disabled',
+                               scrollPolicy :'auto',
+                               selectionMode :'row', 
+                               editMode :'none', 
+                               columns: actionHistoryColumnsConfig}">
+                        </table>
+                    </div>
+                </div>
+                <ul style="display: none" id="collections-actions-menu" class="customerAssets-workspace-card-action-menu" 
+                    data-bind="ojComponent: {component: 'ojMenu', select: menuItemSelect}">
+                    <!--ko if: isReplaceScenarioGrantSet -->
+                    <li>
+                        <a href="#" id="collectionsReplaceScenario"  data-bind="text: util.getLocalizedValue(collectionDetails, 'REPLACE_SCENARIO')">
+                            <span class="oj-menu-item-icon"></span></a>
+                    </li>
+                    <!-- /ko -->
+                    <!-- ko if: isPromiseToPayGrantSet --> 
+                    <li>
+                        <a href="#" id="collectionsPromiseToPay" data-bind="text:P2PActionMenuName">
+                            <span class="oj-menu-item-icon"></span></a>
+                    </li>
+                    <!--/ko -->
+                    <!-- ko if: isMakePaymentGrantSet -->
+                    <li>
+                        <a href="#" id="collectionsMakePymt" data-bind="text: util.getLocalizedValue(homeTab, 'MAKE_PAYMENT')">
+                            <span class="oj-menu-item-icon"></span></a>
+                    </li>
+                    <!-- /ko -->
+                    <!-- ko if: isExemptBUGrantSet -->
+                    <li>
+                        <a href="#" class="collectionsExemptBU" data-bind="text: util.getLocalizedValue(collectionDetails, 'EXEMPT')">
+                            <span class="oj-menu-item-icon"></span></a>
+                    </li>    
+                    <!-- /ko -->
+                    <!-- ko if: isExitGrantSet -->
+                    <li>
+                        <a href="#" id="collectionsExit" data-bind="text: util.getLocalizedValue(collectionDetails, 'EXIT_COLLECTIONS')">
+                            <span class="oj-menu-item-icon"></span></a>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        
+        </div>
+    </div>

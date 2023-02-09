@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<genericTemplate xmlns="http://xmlns.oracle.com/cgbu/schemas/BusinessObjs">
+    <saveResults>false</saveResults> 
+    <columnHeader name="configScenarioId">
+        <label>COLLECTIONS_CONFIG_SCENARIO_ID</label>
+        <visible>true</visible>
+        <sortable>false</sortable>
+        <tooltip>COLLECTIONS_CONFIG_SCENARIO_ID</tooltip>
+        <alignment>left</alignment>
+    </columnHeader>
+    <columnHeader name="accountId">
+        <label>COLLECTIONS_ACCOUNT_ID</label>
+        <visible>true</visible>
+        <sortable>false</sortable>
+        <tooltip>COLLECTIONS_ACCOUNT_ID</tooltip>
+        <alignment>left</alignment>
+    </columnHeader>
+    <columnHeader name="billUnitDetails">
+        <label>COLLECTIONS_BILLUNIT_DETAILS</label>
+        <visible>true</visible>
+        <sortable>false</sortable>
+        <tooltip>COLLECTIONS_BILLUNIT_DETAILS</tooltip>
+        <alignment>left</alignment>
+    </columnHeader>
+    <columnHeader name="isMultipleBillUnit">
+        <label>COLLECTIONS_IS_MULTIPLE_BILLUNIT</label>
+        <visible>true</visible>
+        <sortable>false</sortable>
+        <tooltip>COLLECTIONS_IS_MULTIPLE_BILLUNIT</tooltip>
+        <alignment>left</alignment>
+    </columnHeader>
+    <storableClass>
+        <name>/collections_scenario</name>
+        <column name="accountId">
+            <type>id</type>
+            <fields>accountObj</fields>
+        </column>
+        <column name="configScenarioId">
+            <type>id</type>
+            <fields>poid</fields>
+        </column>
+        <column name="billUnitDetails">
+            <type>billUnitDetails</type>
+            <fields>billinfoId</fields>
+            <fields>billUnitName</fields>
+        </column>
+        <column name="isMultipleBillUnit">
+            <type>Boolean</type>
+            <fields>isMultipleBillUnit</fields>
+        </column>
+       <!--<column name="scenarioId">
+            <type>id</type>
+            <fields>poid</fields>
+        </column>
+         <column name="configScenarioId">
+            <type>id</type>
+            <fields>poid</fields>
+        </column>
+        <column name="accountId">
+            <type>id</type>
+            <fields>accountObj</fields>
+        </column>
+        <column name="accountNumber">
+            <type>Text</type>
+            <fields>accountNo</fields>
+        </column>
+        <column name="totalOverdueAmount">
+            <type>number</type>
+            <fields>overdueAmount</fields>
+        </column>
+        <column name="firstName">
+            <type>text</type>
+            <fields>firstName</fields>
+        </column>
+        <column name="lastName">
+            <type>text</type>
+            <fields>lastName</fields>
+        </column>
+        <column name="oldestBillUnitOverdueDays">
+            <type>number</type>
+            <fields>oldestBillUnitOverdueDays</fields>
+        </column>
+        <column name="isMultipleBillUnit">
+            <type>Boolean</type>
+            <fields>isMultipleBillUnit</fields>
+        </column>
+        <column name="accountCurrency">
+            <type>number</type>
+            <fields>accountCurrency</fields>
+        </column>
+        <column name="billUnitDetails">
+            <type>billUnitDetails</type>
+            <fields>billinfoId</fields>
+            <fields>billUnitName</fields>
+            <fields>currentActionName</fields>
+            <fields>currentActionDueDate</fields>
+            <fields>overdueAmount</fields>
+            <fields>overdueDays</fields>
+            <fields>minimumPayment</fields>
+        </column> -->
+    </storableClass>
+    <sortbyFields name ="overdueT">
+        <sortOrder>asc</sortOrder>
+        <field>overdueT</field>
+        <sortingPriority>1</sortingPriority>
+        <defaultSort>false</defaultSort>
+    </sortbyFields>
+    <sortbyFields name ="overdueAmount">
+        <sortOrder>asc</sortOrder>
+        <field>overdueAmount</field>
+        <sortingPriority>1</sortingPriority>
+        <defaultSort>false</defaultSort>
+    </sortbyFields>
+    <filter>
+        <!-- Account criteria-->
+        <criteria name="accountNumber">
+            <inputType>Text</inputType>
+            <fieldKey>accountNo</fieldKey>
+            <storableClass>/account</storableClass>
+            <join>poid</join>   
+        </criteria> 
+        <criteria name="firstName">
+            <inputType>Text</inputType>
+            <fieldKey>nameinfo.firstName</fieldKey>
+            <storableClass>/account</storableClass>
+            <join>poid</join>   
+        </criteria>
+        <criteria name="lastName">
+            <inputType>Text</inputType>
+            <fieldKey>nameinfo.lastName</fieldKey>
+            <storableClass>/account</storableClass> 
+            <join>poid</join>    
+        </criteria>
+        <criteria name="company">
+            <inputType>Text</inputType>
+            <fieldKey>nameinfo.company</fieldKey>
+            <storableClass>/account</storableClass> 
+            <join>poid</join>   
+        </criteria>
+        <criteria name="schema">
+            <inputType>Number</inputType>
+            <fieldKey>schema</fieldKey>
+        </criteria>
+
+        <!-- Bill unit criteria-->
+        <criteria name="billUnitName">
+            <inputType>Text</inputType>
+            <fieldKey>billinfoId</fieldKey>
+            <storableClass>/billinfo</storableClass> 
+            <join>poid</join> 
+        </criteria>
+        <criteria name="billUnitStatus">
+            <inputType>Number</inputType>
+            <fieldKey>status</fieldKey>
+            <storableClass>/billinfo</storableClass> 
+            <join>poid</join> 
+        </criteria>
+        <criteria name="billDayRange">
+            <fieldGroups > 
+                <groupLabel>Text</groupLabel>
+                <groupOperator>AND</groupOperator>
+                <criteria name="billDay">
+                    <inputType>Number</inputType>
+                    <fieldKey>actgCycleDom</fieldKey>
+                    <storableClass>/billinfo</storableClass>  
+                    <join>poid</join>   
+                </criteria>
+            </fieldGroups>
+        </criteria>
+	
+        <!-- Collections criteria-->
+        <criteria name="overdueDaysRange">
+            <fieldGroups>
+                <groupLabel>Number</groupLabel>
+                <groupOperator>AND</groupOperator>
+                <criteria name="date">
+                    <inputType>Number</inputType>
+                    <fieldKey>overdueT</fieldKey>
+                    <storableClass>/collections_scenario</storableClass>
+                    <join>accountObj</join>     
+                </criteria>
+            </fieldGroups>
+            
+        </criteria>
+        <criteria name="overdueAmountRange">
+            <fieldGroups> 
+                <groupLabel>Text</groupLabel>
+                <groupOperator>AND</groupOperator>
+                <criteria name="amount">
+                    <inputType>Text</inputType>
+                    <fieldKey>overdueAmount</fieldKey>
+                    <storableClass>/collections_scenario</storableClass>
+                    <join>accountObj</join>       
+                </criteria>
+            </fieldGroups>
+        </criteria>
+        <criteria name="scenarios">
+            <fieldGroups> 
+                <groupLabel>scenario</groupLabel>
+                <groupOperator>OR</groupOperator>
+                <criteria name="scenarioId">
+                    <inputType>id</inputType>
+                    <fieldKey>configScenarioObj</fieldKey>
+                    <storableClass>/collections_scenario</storableClass>
+                    <join>accountObj</join>       
+                </criteria>
+            </fieldGroups>
+        </criteria>
+        <criteria name="assignees">
+            <fieldGroups> 
+                <groupLabel>Assigned</groupLabel>
+                <groupOperator>OR</groupOperator>
+                <criteria name="assigneeId">
+                    <inputType>text</inputType>
+                    <fieldKey>externalUser</fieldKey>
+                    <storableClass>/collections_scenario</storableClass>  
+                    <join>accountObj</join>     
+                </criteria>
+            </fieldGroups>
+        </criteria>
+        <criteria name="profiles">
+            <fieldGroups> 
+                <groupLabel>profile</groupLabel>
+                <groupOperator>OR</groupOperator>
+                <criteria name="profileId">
+                    <inputType>id</inputType>
+                    <fieldKey>scenarioInfo.configProfileObj</fieldKey>
+                    <storableClass>/config/collections/scenario</storableClass>  
+                    <join>poid</join>  
+                </criteria>
+            </fieldGroups>
+        </criteria>
+    </filter>    
+</genericTemplate>

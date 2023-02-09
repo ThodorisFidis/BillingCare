@@ -1,0 +1,22 @@
+{
+  "type" : "Wire-Transfer",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment10013",
+  "internalStruct" : "wireTransferInfo",
+  "fields" : [ {
+    "label" : "Date",
+    "datatype" : "date",
+    "fieldName" : "effectiveDate"
+  }, {
+    "label" : "Wire-transfer ID",
+    "datatype" : "string",
+    "fieldName" : "wireTransferId"
+  }, {
+    "label" : "Bank Code",
+    "datatype" : "string",
+    "fieldName" : "bankCode"
+  }, {
+    "label" : "Bank Account Number",
+    "datatype" : "string",
+    "fieldName" : "bankAccountNo"
+  } ]
+}

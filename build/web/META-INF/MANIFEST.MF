@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Built-By: Oracle
+Specification-Title: BillingCareSDKDevelopment
+Specification-Version: 2.0
+Implementation-Title: Custom SDK WAR file for Billing Care
+Implementation-Version: 2.0
+Implementation-Vendor: Oracle
+Extension-Name: BillingCareSDKDevelopment

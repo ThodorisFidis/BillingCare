@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment-plan xmlns="http://xmlns.oracle.com/weblogic/deployment-plan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.oracle.com/weblogic/deployment-plan http://xmlns.oracle.com/weblogic/deployment-plan/1.0/deployment-plan.xsd" global-variables="false">
+   <application-name>BillingCare.war</application-name>
+   <variable-definition>
+      <variable>
+         <name>Custom-ImplementationVersion</name>
+         <value xsi:nil="false">2.0</value>
+      </variable>
+      <variable>
+         <name>Custom-SpecificationVersion</name>
+         <value xsi:nil="false">2.0</value>
+      </variable>
+      <variable>
+         <name>Custom-LibraryName</name>
+         <value xsi:nil="false">BillingCareSDKDevelopment</value>
+      </variable>
+      <variable>
+         <name>Custom-ExactMatch</name>
+         <value xsi:nil="false">true</value>
+      </variable>
+      <variable>
+         <name>Custom-ContextPath</name>
+         <value />
+      </variable>
+      <variable>
+      <name>ResourceDescription_wm/BatchPaymentsWorkManager_ResRefName_16183142158110</name>
+      <value>wm/BatchPaymentsWorkManager</value>
+    </variable>
+    <variable>
+      <name>ServletDescriptor_jersey_ServletName_16183142158121</name>
+      <value>jersey</value>
+    </variable>
+    <variable>
+      <name>ServletDescriptor_jsdispatch_ServletName_16183142158122</name>
+      <value>jsdispatch</value>
+    </variable>
+    <variable>
+      <name>ServletDescriptor_LogoutServlet_ServletName_16183142158133</name>
+      <value>LogoutServlet</value>
+    </variable>
+    <variable>
+      <name>WeblogicWebApp_ContextRoots_16183142337944</name>
+      <value>"/bcdev"</value>
+    </variable>
+   </variable-definition>
+   <module-override>
+      <module-name>BillingCare.war</module-name>
+      <module-type>war</module-type>
+      <module-descriptor external="true">
+         <root-element>weblogic-web-app</root-element>
+         <uri>WEB-INF/weblogic.xml</uri>
+         <variable-assignment>
+            <name>Custom-LibraryName</name>
+            <xpath>/weblogic-web-app/library-ref/library-name</xpath>
+         </variable-assignment>
+      <variable-assignment>
+        <name>ResourceDescription_wm/BatchPaymentsWorkManager_ResRefName_16183142158110</name>
+        <xpath>/weblogic-web-app/resource-description/[res-ref-name="wm/BatchPaymentsWorkManager"]/res-ref-name</xpath>
+        <origin>planbased</origin>
+      </variable-assignment>
+      <variable-assignment>
+        <name>ServletDescriptor_jersey_ServletName_16183142158121</name>
+        <xpath>/weblogic-web-app/servlet-descriptor/[servlet-name="jersey"]/servlet-name</xpath>
+        <origin>planbased</origin>
+      </variable-assignment>
+      <variable-assignment>
+        <name>ServletDescriptor_jsdispatch_ServletName_16183142158122</name>
+        <xpath>/weblogic-web-app/servlet-descriptor/[servlet-name="jsdispatch"]/servlet-name</xpath>
+        <origin>planbased</origin>
+      </variable-assignment>
+      <variable-assignment>
+        <name>ServletDescriptor_LogoutServlet_ServletName_16183142158133</name>
+        <xpath>/weblogic-web-app/servlet-descriptor/[servlet-name="LogoutServlet"]/servlet-name</xpath>
+        <origin>planbased</origin>
+      </variable-assignment>
+      <variable-assignment>
+        <name>WeblogicWebApp_ContextRoots_16183142337944</name>
+        <xpath>/weblogic-web-app/context-root</xpath>
+        <operation>replace</operation>
+      </variable-assignment>
+    </module-descriptor>
+    <module-descriptor external="false">
+      <root-element>web-app</root-element>
+      <uri>WEB-INF/web.xml</uri>
+    </module-descriptor>
+    <module-descriptor external="true">
+      <root-element>wldf-resource</root-element>
+      <uri>META-INF/weblogic-diagnostics.xml</uri>
+    </module-descriptor>
+   </module-override>
+</deployment-plan>

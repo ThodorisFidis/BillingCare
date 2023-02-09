@@ -1,0 +1,1013 @@
+<div id="collections-search-container" tabindex="-1">
+    <div class="oj-flex max-width" tabindex="-1">
+        <div class="oj-flex-item oj-lg-3 criteria">
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-12 add-filter-wrapper">
+                    <a tabindex="0" id="exemptedBillUnitsLink" href="javascript:void(0);"
+                       data-bind="click: openShowExemptedBillUnits,
+                                  event: {keypress: openShowExemptedBillUnitsDialogOnEnterOrSpace},
+                                  authorize_command:{make:'hide', resource: COLLECTIONS_RESOURCE, action: COLLECTIONS_EXEMPT_ACTION}">
+                        <%= collections.SHOW_EXEMPT_BILL_UNITS %></a>
+                </div> 
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-12 collections-label">
+                    <label id="collections-label" class="label-large"><%= collections.COLLECTIONS %></label>
+                </div>
+            </div>
+            <div class="collections-search-criteria-section">
+                <div class="oj-flex first-row">
+                    <div class="oj-flex-item oj-lg-6">
+                        <label id="bill-unit-filter-section-label" data-bind="text: labelBillUnit" class="label-large"></label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="add-filter-wrapper">
+                            <a id="add-bill-unit-filter" href="javascript:void(0);" 
+                               data-bind="text: paymentSuspense.ADD_FILTER, 
+                                      click: showBillFilter,
+                                      event: {keypress: showBillFilterOnEnterOrSpace},
+                                      attr: {title: paymentSuspense.ADD_FILTER}"></a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div data-bind="with: billUnit">
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="bill-unit-filter-bill-unit-label" data-bind="text: billUnitHeading, attr: {'for': 'selected-bill-unit'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-bill-unit" class="items-wrapper" data-bind="foreach: billUnit">
+                                <div class="token-item">
+                                    <span data-bind="text: $data, attr: {title: $data}"></span>
+                                    <i class="icon" tabindex="0"
+                                       data-bind="click: $parent.removeBillUnit, 
+                                              event: {keypress: $parent.removeBillUnitOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="bill-unit-filter-bill-unit-status-label" data-bind="text: billUnitStatusHeading, attr: {'for': 'selected-bill-unit-status'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-bill-unit-status" class="items-wrapper" data-bind="foreach: billUnitStatus">
+                                <div class="token-item">
+                                    <span data-bind="text: value, attr: {title: value}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeBillUnitStatus, 
+                                              event: {keypress: $parent.removeBillUnitStatusOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="bill-unit-filter-billing-day" data-bind="text: billingDayHeading, attr: {'for': 'selected-bill-day'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-billing-day" class="items-wrapper" data-bind="foreach: selectedBillingDay">
+                                <div class="token-item">
+                                    <span data-bind="text: $data, attr: {title: $data}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeBillingDay, 
+                                              event: {keypress: $parent.removeBillingDayOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+ 
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-6">
+                        <label id="collections-filter-section-label" data-bind="text: labelCollections" class="label-large"></label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="add-filter-wrapper">
+                            <a id="add-collections-filter" href="javascript:void(0);" 
+                               data-bind="text: paymentSuspense.ADD_FILTER,
+                                      click: showCollectionsFilter,
+                                      event: {keypress: showCollectionsFilterOnEnterOrSpace},
+                                      attr: {title: paymentSuspense.ADD_FILTER}"></a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div data-bind="with: collections">
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="collections-filter-agent-label" data-bind="text: agentHeading, attr: {'for': 'selected-agent'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-agent" class="items-wrapper" data-bind="foreach: agent">
+                                <div class="token-item">
+                                    <span data-bind="text: agentLabel, attr: {title: agentLabel}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeAgent,
+                                              event: {keypress: $parent.removeAgentOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div data-bind="with: amountField">
+                        <div class="oj-flex filter-header">
+                            <div class="oj-flex-item oj-lg-12">
+                                <label id="collections-filter-amount-label" data-bind="text: amountHeading, attr: {'for': 'selected-amount'}" class="payment-suspense-search-filter-label"></label>
+                            </div>
+                        </div>
+                        <div class="oj-flex">
+                            <div class="oj-flex-item oj-lg-12">
+                                <div id="selected-amount" class="items-wrapper" data-bind="foreach: selectedAmount">
+                                    <div class="token-item">
+                                        <span data-bind="text: tag, attr: {title: tag}"></span>
+                                        <i class="icon" tabindex="0" 
+                                           data-bind="click: $parent.removeAmount,
+                                                  event: {keypress: $parent.removeAmountOnEnterOrSpace},
+                                                  attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div data-bind="with: daysOverdueField">
+                        <div class="oj-flex filter-header">
+                            <div class="oj-flex-item oj-lg-12">
+                                <label id="collections-filter-days-overdue-label" data-bind="text: daysOverdueHeading, attr: {'for': 'selected-days-overdue'}" class="payment-suspense-search-filter-label"></label>
+                            </div>
+                        </div>
+                        <div class="oj-flex">
+                            <div class="oj-flex-item oj-lg-12">
+                                <div id="selected-days-overdue" class="items-wrapper" data-bind="foreach: selectedDaysOverdue">
+                                    <div class="token-item">
+                                        <span data-bind="text: tag, attr: {title: tag}"></span>
+                                        <i class="icon" tabindex="0" 
+                                           data-bind="click: $parent.removeDaysOverdue, 
+                                                  event: {keypress: $parent.removeDaysOverdueOnEnterOrSpace},
+                                                  attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="collections-filter-scenario-label" data-bind="text: scenarioHeading, attr: {'for': 'selected-scenario'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-scenario" class="items-wrapper" data-bind="foreach: scenario">
+                                <div class="token-item">
+                                    <span data-bind="text: name, attr: {title: name}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeScenario,
+                                              event: {keypress: $parent.removeScenarioOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="collections-filter-profile-label" data-bind="text: profileHeading, attr: {'for': 'selected-profile'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-profile" class="items-wrapper" data-bind="foreach: profile">
+                                <div class="token-item">
+                                    <span data-bind="text: name, attr: {title: name}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeProfile,
+                                              event: {keypress: $parent.removeProfileOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+ 
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-6">
+                        <label id="account-filter-section-label" data-bind="text: labelAccount" class="label-large"></label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="add-filter-wrapper">
+                            <a id="add-account-filter" href="javascript:void(0);" 
+                               data-bind="text: paymentSuspense.ADD_FILTER,
+                                      click: showAccountFilter,
+                                      event: {keypress: showAccountFilterOnEnterOrSpace},
+                                      attr: {title: paymentSuspense.ADD_FILTER}"></a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div data-bind="with: account">
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="account-filter-account-number-label" data-bind="text: accountNumberHeading, attr: {'for': 'selected-account-number'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-account-number" class="items-wrapper" data-bind="foreach: accountNumber">
+                                <div class="token-item">
+                                    <span data-bind="text: $data, attr: {title: $data}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeAccountNumber, 
+                                              event: {keypress: $parent.removeAccountNumberOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="account-filter-name-label" data-bind="text: nameHeading, attr: {'for': 'selected-name'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-name" class="items-wrapper" data-bind="foreach: selectedName">
+                                <div class="token-item">
+                                    <span data-bind="text: $data, attr: {title: $data}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeName, 
+                                              event: {keypress: $parent.removeNameOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="account-filter-company-label" data-bind="text: companyHeading, attr: {'for': 'selected-company'}" class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-company" class="items-wrapper" data-bind="foreach: company">
+                                <div class="token-item">
+                                    <span data-bind="text: $data, attr: {title: $data}"></span>
+                                    <i class="icon" tabindex="0" 
+                                       data-bind="click: $parent.removeCompany, 
+                                              event: {keypress: $parent.removeCompanyOnEnterOrSpace},
+                                              attr: {'aria-label': '<%= accountCreation.CLEAR_FILTER %>'}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <div class="oj-flex filter-header">
+                        <div class="oj-flex-item oj-lg-12">
+                            <label id="account-filter-schema-label"
+                                   data-bind="text: schemaHeading, attr: {'for': 'selected-schema'}"
+                                   class="payment-suspense-search-filter-label"></label>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div id="selected-schema" class="items-wrapper" data-bind="foreach: schema">
+                                <div class="token-item">
+                                    <span data-bind="text: $data, attr: {title: $data}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <br>
+                <hr>
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-5">
+                    <div class="padding10px">&nbsp;</div>
+                </div>
+                <div class="oj-flex-item oj-lg-2">
+                    <div class="padding10px">
+                        <a id="resetButton" href="javascript:void(0);" 
+                           data-bind="disable: disableReset, text: labelReset,
+                                      click: reset,
+                                      event: {keypress: resetOnEnterOrSpace}"></a>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-lg-5">
+                    <div class="padding10px">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-9"  id="payment-suspense-result-container">
+            <div class="oj-flex close-button" id="collections-close">
+                <div class="oj-flex-item oj-lg-11">&nbsp;</div>
+                <div class="oj-flex-item oj-lg-1">
+                    <a href="javascript:void(0);" style="color: #045fab;" data-bind="click: close, 
+                       event: {keypress: closeOnKeyPress}"><%= common.CLOSE %></a>
+                </div>
+            </div>
+ 
+            <div>
+                <!-- ko if: showInitialMsg() === true  -->
+                <div  class="oj-flex initial-msg">
+                    <div class="no-records-image dimensions"></div>
+                    <div data-bind="text: labelInitMsg"></div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: recordCount() ===  0 && showInitialMsg() === false  -->
+                <div class="oj-flex">
+                    <div class="oj-flex-item lg-lg-12 text-align-center"><span data-bind="text: labelNoRecords" class="label-medium" id="no_records_found"></span></div>
+                </div>  
+                <!-- /ko -->
+                <!-- ko if: recordCount() > 0 && showInitialMsg() === false -->
+                <div id="collections-sort" class="oj-flex">
+                    <div class="oj-flex-item oj-lg-8">
+                        &nbsp;</div>
+                    <div class="oj-flex-item oj-lg-4">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item oj-lg-2 paddingTop10px ">
+ 
+                            </div>
+                            <div class="oj-flex-item oj-lg-2 paddingTop10px">
+                                <label style="color: #626262;" data-bind="text: util.getLocalizedValue(paymentSuspense, 'SORT'), attr: {'for': labelSort}"></label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-8">
+                                <select  data-bind="attr: {'id': labelSort},
+                                        ojComponent: {component: 'ojSelect',
+                                                      value: selectedSortOption,
+                                                      rootAttributes: {style:'max-width:26em;width:18.5em;'},
+                                                      optionChange: sortCollectionsRecords}">
+                                    <!-- ko foreach: sortOptions -->
+                                    <option data-bind="value:key + '#' + sortOrder, text:label, attr: {'data-sort-order': sortOrder}"></option>
+                                    <!-- /ko -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="collections-result" class="oj-flex result">
+                    <div class="width100">
+                        <ul id="collections-search-result" label="Collections Search Result"
+                            aria-label="<%=collections.COLLECTIONS_SEARCH_RESULT%>"
+                            data-bind="ojComponent: {data: dataSource,
+                                      component: 'ojListView',
+                                      selectionMode: 'single',
+                                      item: {template: 'server_template'}}"></ul>
+                        <script type="text/html" id="server_template">
+                            <li label="Collections Search Result Record"
+                                data-bind="attr: {id: $data['accountId'].value},
+                                           click: $root.openSearchDetailsPage,
+                                           event: {keypress: $root.openSearchDetailsPageOnKeyPress}">
+                                <div class="oj-flex">
+                                    <div class="collections-results-accountId-section">
+                                        <span class="collections-account-number">Account ID: </span><span id="collections-results-accountId" data-bind="text:accountId.value"></span> <!-- text:accountNumber -->
+                                        
+                                    </div>
+                                    <div class="collections-result-img-section">
+                                        <div class="" data-bind="if:isIconVisible">
+                                            <img class="collections-icon" src="custom/images/currency.jpg" width="66" height="66" alt="test"/>
+                                        </div>
+                                        <div class="collection-result-acccount-link">
+                                            <a target="_blank"
+                                               data-bind="attr:{href:'/bc/index.html#accounts/' + accountId.value,
+                                                                'account-id': accountId.value, title: 'Open Accounts Page'},
+                                                          click: $root.openAccount,
+                                                          event: {keypress: $root.openAccountOnKeyPress}">
+                                                <!--<span id="collections-result-accountName" class="collection-result-acccount-link-accountname"
+                                                      data-bind="text: firstName.value + ' ' + lastName.value"></span>
+                                                <span class="collection-result-acccount-link-img">
+                                                    <img src="resources/images/newwindow.png" width="16" height="16" style="margin-left: 8px" alt="<%= common.IMAGE_OPEN_NEW_WINDOW %>"/>
+                                                </span>-->
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="collections-results-details-section" 
+                                         data-bind="css: {'marginTop30px': (isMultipleBillUnit.value === 'false')}">
+                                        <div class="oj-flex">
+                                            <!--<div class="collections-results-past-due-section">
+                                                <div class="collections-past-due">
+                                                    <span class="collections-past-due-text"><%= collections.PAST_DUE %> </span>
+                                                </div> 
+                                                <div class="marginLeft5px">
+                                                    <span id="collections-result-pastDue" class="totalOverdueAmount" data-bind="text: totalOverdueAmount.value"></span>&nbsp;
+                                                    <span id="collections-result-currency" data-bind="text: accountCurrency.value" class="collection-results-currency"></span>
+                                                </div>-->
+                                                <!-- ko if: (isMultipleBillUnit.value === "false") -->
+                                              <!--  <div class="collections-result-current-action">
+                                                    <span><%= collections.MINIMUM_PAYMENT %> : </span>&nbsp;<span id="collection-result-minimum-payment" data-bind="text:billUnitDetails.value[0].minimumPayment "></span>
+                                                </div>-->
+                                                <!-- /ko -->
+                                                <!-- ko if: (isMultipleBillUnit.value === "true") -->
+                                             <!--   <div>
+                                                    <span><%= collections.FOR_ALL_BILL_UNITS %></span>
+                                                </div>-->
+                                                <!-- /ko -->
+                                            <!--</div>-->
+                                            <div class="collection-result-overdue-section">
+                                                <!--<div class="collection-result-days-overdue-section">
+                                                    <span class="collection-result-for-text"><%= collections.FOR %> </span>
+                                                    <span id="collection-result-daysPastDue" data-bind="text:oldestBillUnitOverdueDays.value"></span> &nbsp;<span><%= collections.DAYS_LC %></span>
+                                                </div>-->
+                                                <!-- ko if: (isMultipleBillUnit.value === "true") -->
+                                                <!--<div>
+                                                    <span><%= collections.OLDEST_DUE %></span>
+                                                </div>-->
+                                                <!-- /ko -->
+                                                <!-- ko if: (isMultipleBillUnit.value === "false" && billUnitDetails.value[0].currentActionName) -->
+                                                <div class="collections-result-current-action">
+                                                    <span><%= collections.CURRENT_ACTION %> : </span>&nbsp;<span id="collection-result-current-action" data-bind="text:billUnitDetails.value[0].currentActionName "></span>
+                                                </div>
+                                               <!-- <div class="collections-result-current-action-due-date">
+                                                    <span><%= collections.DUE_DATE %> : </span> &nbsp;<span id="collection-result-current-action-date" data-bind="text:billUnitDetails.value[0].currentActionDueDate "></span>
+                                                </div>-->
+                                                <div class="collections-result-current-action-due-date">
+                                                    <span>Config Scenario Id : </span> &nbsp;<span id="collection-result-current-action-date" class="totalOverdueAmount" data-bind="text:configScenarioId.value "></span>
+                                                </div>
+                                               <div class="collections-result-current-action-due-date">
+                                                    <span> BillUnit : </span> &nbsp;<span id="collection-result-bill-unit" data-bind="text:billUnitDetails.value[0].billUnitName "></span>
+                                                </div>
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
+                                        <!-- ko if: (isMultipleBillUnit.value === "true") -->
+                                        <div id="collectionsCurrentActionTable" class="oj-flex collections-current-action-table"
+                                             data-bind="visible: isMultipleBillUnit.value">
+                                            <table id="collection-current-actions" summary="Bill Units in Collections"
+                                                   aria-label="Bill Unit in Collections"
+                                                   data-bind="ojComponent: {component: 'ojTable', 
+                                                                data: billUnitDetails.value, 
+                                                                columnsDefault: {sortable: 'none'}, 
+                                                                columns: [
+                                                                    {
+                                                                        headerText: util.getLocalizedValue(accountBanner, 'BILL_UNIT')
+                                                                    },
+                                                                    {
+                                                                        headerText:util.getLocalizedValue(collections, 'CURRENT_ACTION')
+                                                                    },
+                                                                    {
+                                                                        headerText:util.getLocalizedValue(collections, 'DUE_DATE')
+                                                                    },
+                                                                    {
+                                                                        headerText: util.getLocalizedValue(collections, 'DAYS_OVER_DUE')
+                                                                    },
+                                                                    {
+                                                                        headerText: util.getLocalizedValue(collections, 'MINIMUM_PAYMENT')
+                                                                    },
+                                                                    {
+                                                                        headerText: util.getLocalizedValue(collections, 'AMOUNT_DUE')
+                                                                    }
+                                                                ],
+                                                                rowTemplate: 'row_tmpl'}">
+                                            </table>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </li>
+                            </script>
+                            <script type="text/html" id="row_tmpl">
+                                <tr>
+                                    <td data-bind="text: billUnitName" id="td_billUnitName" class="collectionsBillUnitName"></td>
+                                    <td data-bind="text: currentActionName" id="td_currentActionName"></td>
+                                    <td data-bind="text: currentActionDueDate" id="td_currentActionDueDate"></td>
+                                    <td data-bind="text: overdueDays" id="td_overdueDays"></td>
+                                    <td data-bind="text: minimumPayment" id="td_minimumPayment" class="textAlignRight"></td>
+                                    <td data-bind="text: overdueAmount, css:{'lastRow' : isLastRow}" id="td_overdueAmount" class="textAlignRight"></td>
+                                </tr>
+                                </script>
+                            </div>
+                        </div>
+                        <div id="collections-more" class="oj-flex paddingTop10px">
+                            <div class="oj-flex-item oj-lg-4">&nbsp;</div>
+                            <div class="oj-flex-item oj-lg-4">
+                                <div data-bind="component: {name: 'pagination', params: paginationModel}"></div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4">&nbsp;</div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <div style="display:none" id="modelessDialog" title="Account"
+                 data-bind="ojComponent: {component: 'ojDialog',
+                                  initialVisibility: 'hide',
+                                  modality: 'modeless',
+                                  dragAffordance: 'none',
+                                  close: 'escape',
+                                  cancelBehavior: 'escape',
+                                  resizeBehavior:'none',
+                                  rootAttributes: { style: 'width: 430px;height: auto;overflow:auto' }}">
+                <div class="oj-dialog-header oj-helper-clearfix" aria-labelledby="dialogTitleId">
+                    <span id="dialogTitleId" class="oj-dialog-title" data-bind="text: currentDialog"></span>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-12">
+                        <div id="dialogWrapper">
+                            <div class="oj-dialog-body">
+                                <form id="collections-search-form">
+                                    <div id="accountForm" data-bind="with: account, visible: isAccountDataVisible">
+                                        <div id="account-number-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-account-number"
+                                                           data-bind="text: accountNumberLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <input id="payment-search-account-number" type="text"
+                                                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                        value: mockAccountNumber},
+                                                        attr:{'title': paymentSuspense.PAYMENT_SUSPENSE_ACCOUNT_NUMBER}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="first-name-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-first-name"
+                                                           data-bind="text: firstNameLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <input id="collections-search-first-name" type="text"
+                                                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                                value: mockFirstName}, attr:{'title': firstNameLabel}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="last-name-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-last-name"
+                                                           data-bind="text: lastNameLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <input id="collections-search-last-name" type="text"
+                                                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                                value: mockLastName}, attr:{'title': lastNameLabel}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="company-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-company"
+                                                           data-bind="text: companyLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <input id="collections-search-company"  type="text"
+                                                           data-bind="ojComponent: {component: 'ojInputText',
+                                                              value: mockCompany}, attr:{'title': companyLabel}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="schema-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-schema"
+                                                           data-bind="text: schemaLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <select id="collections-search-schema"
+                                                            data-bind="attr:{'title': schemaLabel},
+                                                            ojComponent: {component: 'ojSelect',
+                                                                          value: mockSchema}">
+                                                        <!-- ko foreach: schemaOptions -->
+                                                        <option data-bind="value: id, text: name"></option>
+                                                        <!-- /ko -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div id="billForm" data-bind="with:billUnit, visible: isBillDataVisible">
+                                        <div id="bill-unit-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-bill-unit"
+                                                           data-bind="text: billUnitLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <input id="collections-search-bill-unit"  type="text"
+                                                           data-bind="ojComponent: {component: 'ojInputText',
+                                                              value: mockBillUnit}, attr:{'title': billUnitLabel}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="bill-unit-status-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-bill-unit-status"
+                                                           data-bind="text: billUnitStatusLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <select id="collections-search-bill-unit-status"
+                                                            data-bind="attr: {'title': billUnitStatusLabel},
+                                                        ojComponent: {component: 'ojSelect', value: selectedBillUnitStatusOption}">
+                                                        <option value="-1" data-bind="text: paymentSuspense.OPT_ANY"></option>
+                                                        <!-- ko foreach: billUnitStatusOptions -->
+                                                        <option data-bind="value: key, text: value"></option>
+                                                        <!-- /ko -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="billing-day-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label data-bind="text: labelBillingDay, attr: {'for': labelBillingDay}"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex-item oj-lg-12">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item oj-lg-3 paddingTop10px">
+                                                        <label for="collections-from-billingDay"
+                                                               data-bind="text: labelFromBillingDay"
+                                                               class="payment-suspense-search-filter-label"></label>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-9">
+                                                        <input id="collections-from-billingDay" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {component: 'ojInputNumber',
+                                                                    max: maxFromBillDay, min:1, step:1,
+                                                                    converter: {
+                                                                        type: 'number',
+                                                                        options: {
+                                                                        style:'decimal',
+                                                                        minimumFractionDigits: 0,
+                                                                        maximumFractionDigits: 0
+                                                                        }
+                                                                    },
+                                                                    value: fromBillingDay,
+                                                                    placeholder: collections.DAYS},
+                                                                attr:{'title': collections.DAYS}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item oj-lg-3 paddingTop10px">
+                                                        <label for="collections-to-billingDay"
+                                                               data-bind="text: labelToBillingDay"
+                                                               class="payment-suspense-search-filter-label"></label>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-9">
+                                                        <input id="collections-to-billingDay" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {component: 'ojInputNumber',
+                                                                max: 31, min: minToBillingDay , step:1,
+                                                                converter: {
+                                                                    type: 'number', 
+                                                                    options: {
+                                                                    style:'decimal', 
+                                                                    minimumFractionDigits: 0,
+                                                                    maximumFractionDigits: 0
+                                                                    }
+                                                                },
+                                                                value: toBillingDay,
+                                                                placeholder: collections.DAYS},
+                                                            attr:{'title': collections.DAYS}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div id="collectionsForm" data-bind="visible: isCollectionsDataVisible, with: collections">
+                                        <div id="agent-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-agent"
+                                                           data-bind="text: agentLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12 oj-sm-12">
+                                                    <div id="collections-search-agent"
+                                                         data-bind="ojComponent: {component: 'ojButtonset', checked: selectedAgentOptions}">
+                                                        <div id="agents-container" data-bind="foreach: agentOptions">
+                                                            <label data-bind="attr: {'for': util.sentenceToCamelCase($data.agentLabel), 'title': $data.agentLabel}, text: $data.agentLabel"></label>
+                                                            <input class="reason" type='checkbox' 
+                                                                   data-bind="attr:{'id': util.sentenceToCamelCase($data.agentLabel)}, 
+                                                                    ojComponent: {component: 'ojButton'}, 
+                                                                        value: $data.agentId, checked: $data.isSelected"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="amount-filter" data-bind="with: amountField">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label data-bind="text: labelAmount, attr: {'for': labelAmount()}"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <div id="collections-search-amount" class="width100"
+                                                         data-bind="ojComponent: {component: 'ojButtonset', checked: selectedAmountOption, optionChange: amountChangeHandler}" aria-label="">
+                                                        <!-- ko foreach: amountOptions -->
+                                                        <label data-bind="attr: {for: id, 'title': label}"></label>
+                                                        <input type="radio" name="amountSelection" 
+                                                               data-bind="value: id, attr: {id: id}, 
+                                                            ojComponent: { component: 'ojButton', label: label }"/>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div data-bind="visible: showAmountRelativeOptions">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item oj-lg-6">
+                                                        <select id="collections-search-relative-amount-selector"
+                                                                data-bind="ojComponent: {component: 'ojSelect',
+                                                            value: selectedRelativeAmountOption}">
+                                                            <!-- ko foreach: amountRelativeOptions -->
+                                                            <option data-bind="value: id, text: label"></option>
+                                                            <!-- /ko -->
+                                                        </select>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-6">
+                                                        <input id="collections-search-relative-amount" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {component: 'ojInputNumber',min:0,converter: {type: 'number',options: {style:'decimal', maximumFractionDigits:2,minimumFractionDigits:2 }}, value: relativeAmount, placeholder: paymentSuspense.AMOUNT_PLACEHOLDER}, attr:{'title': paymentSuspense.AMOUNT_PLACEHOLDER}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-bind="visible:showAmountRangeOptions">
+                                                <div class="oj-flex">
+                                                    <div id="collections-amount-from-div1" class="oj-flex-item oj-lg-1 paddingTop10px ">
+                                                        <label for="collections-from-amount" data-bind="text: labelFromAmount"
+                                                               class="payment-suspense-search-filter-label oj-lg-text-align-end"></label>
+                                                    </div>
+                                                    <div id="suspense-amount-from-div2" class="oj-flex-item oj-lg-4">
+                                                        <input id="collections-from-amount"  onkeypress="return util.checkPostiveNumber(event)" data-bind="ojComponent: {
+                                                        component: 'ojInputNumber',
+                                                        min:0,
+                                                        max: toAmount,
+                                                        converter: {
+                                                            type: 'number', 
+                                                            options: {
+                                                                style:'decimal',
+                                                                maximumFractionDigits:2,
+                                                                minimumFractionDigits:2
+                                                            }
+                                                        },
+                                                        value: fromAmount, placeholder: paymentSuspense.AMOUNT_PLACEHOLDER}, attr:{'title': paymentSuspense.AMOUNT_PLACEHOLDER}"/>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-1 paddingTop10px marginLeft30">
+                                                        <label for="collections-to-amount" data-bind="text: labelToAmount" class="payment-suspense-search-filter-label oj-lg-text-align-end"></label>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-4">
+                                                        <input id="collections-to-amount" onkeypress="return util.checkPostiveNumber(event)" data-bind="ojComponent: {
+                                                        component: 'ojInputNumber',
+                                                        min: fromAmount,
+                                                        converter: {
+                                                            type: 'number', 
+                                                            options: {
+                                                            style:'decimal',
+                                                                maximumFractionDigits:2,
+                                                                minimumFractionDigits:2
+                                                            }
+                                                        },                                                                
+                                                        value: toAmount, placeholder: paymentSuspense.AMOUNT_PLACEHOLDER}, attr:{'title': paymentSuspense.AMOUNT_PLACEHOLDER}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-bind="visible: showExactAmountOption">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item oj-lg-1 paddingTop10px">
+                                                        <label for="collections-exact-amount"
+                                                               data-bind="text: labelexactAmount"
+                                                               class="payment-suspense-search-filter-label oj-lg-text-align-end"></label>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-2">
+                                                        <input id="collections-exact-amount" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {component: 'ojInputNumber',min:0,converter: {type: 'number',options: {style:'decimal', maximumFractionDigits:2,minimumFractionDigits:2 }},  value: is, placeholder: paymentSuspense.AMOUNT_PLACEHOLDER}, attr:{'title': paymentSuspense.AMOUNT_PLACEHOLDER}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="daysOverdue-filter" data-bind="with: daysOverdueField">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label data-bind="text: labelDaysOverdue, attr: {'for': labelDaysOverdue()}"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <div id="collections-search-daysOverDue" class="width100"
+                                                         data-bind="ojComponent: {component: 'ojButtonset', checked: selectedDaysOverdueOption, optionChange: daysOverdueChangeHandler}" aria-label="">
+                                                        <!-- ko foreach: daysOverdueOptions -->
+                                                        <label data-bind="attr: {for: id, 'title': label}"></label>
+                                                        <input type="radio" name="daysOverdueSelection" 
+                                                               data-bind="value: id, attr: {id: id}, 
+                                                                ojComponent: { component: 'ojButton', label: label }"/>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div data-bind="visible: showDaysOverdueRelativeOptions">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item oj-lg-6">
+                                                        <select id="collections-search-relative-daysOverDue-selector"
+                                                                data-bind="ojComponent: {component: 'ojSelect',
+                                                                        value: selectedRelativeDaysOverdueOption}">
+                                                            <!-- ko foreach:daysOverdueRelativeOptions -->
+                                                            <option data-bind="value: id, text: label"></option>
+                                                            <!-- /ko -->
+                                                        </select>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-6">
+                                                        <input id="collections-search-relative-daysOverDue" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {component: 'ojInputNumber',min:0,converter: {type: 'number',options: {style:'decimal',minimumFractionDigits: 0, maximumFractionDigits: 0}}, value: relativeDaysOverdue, placeholder: collections.DAYS_LC}, attr:{'title': collections.DAYS_LC}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-bind="visible:showDaysOverdueRangeOptions">
+                                                <div class="oj-flex">
+                                                    <div id="collections-daysOverdue-from-div1" class="oj-flex-item oj-lg-1 paddingTop10px">
+                                                        <label for="paymentsuspense-from-daysoverdue" data-bind="text: labelFromDaysOverdue"
+                                                               class="payment-suspense-search-filter-label oj-lg-text-align-end"></label>
+                                                    </div>
+                                                    <div id="collections-daysOverdue-from-div2" class="oj-flex-item oj-lg-4">
+                                                        <input id="collections-from-daysOverDue" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {
+                                                                component: 'ojInputNumber',
+                                                                min:0,
+                                                                max: toDaysOverdue,
+                                                                converter: {
+                                                                type: 'number', 
+                                                                options: {
+                                                                style:'decimal',
+                                                                minimumFractionDigits: 0, maximumFractionDigits: 0
+                                                                }},
+                                                                value: fromDaysOverDue, placeholder: collections.DAYS_LC}, attr:{'title': collections.DAYS_LC}"/>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-1 paddingTop10px marginLeft30">
+                                                        <label for="collections-to-daysOverDue" data-bind="text: labelToDaysOverdue"
+                                                               class="payment-suspense-search-filter-label oj-lg-text-align-end"></label>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-4">
+                                                        <input id="collections-to-daysOverDue" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {
+                                                                component: 'ojInputNumber',
+                                                                    min: fromDaysOverDue,
+                                                                    converter: {
+                                                                        type: 'number', 
+                                                                        options: {
+                                                                            style:'decimal',
+                                                                            minimumFractionDigits: 0, maximumFractionDigits: 0
+                                                                        }
+                                                                    },
+                                                                    value: toDaysOverdue,
+                                                                    placeholder: collections.DAYS_LC
+                                                                }, attr:{'title': collections.DAYS_LC}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-bind="visible: showExactDaysOverdueOption">
+                                                <div class="oj-flex">
+                                                    <div class="oj-flex-item oj-lg-1 paddingTop10px">
+                                                        <label for="collections-search-exact-daysOverDue" data-bind="text: labelExactDaysOverdue"
+                                                               class="payment-suspense-search-filter-label oj-lg-text-align-end"></label>
+                                                    </div>
+                                                    <div class="oj-flex-item oj-lg-2">
+                                                        <input id="collections-exact-daysOverDue" onkeypress="return util.checkPostiveNumber(event)"
+                                                               data-bind="ojComponent: {component: 'ojInputNumber',
+                                                                                value: is,
+                                                                                min:0,
+                                                                                converter: {
+                                                                                    type: 'number',
+                                                                                    options: {
+                                                                                        style:'decimal',
+                                                                                        roundingMode: 'HALF_DOWN',
+                                                                                        maximumFractionDigits:0,
+                                                                                        useGrouping: false
+                                                                                    }
+                                                                                },
+                                                                                
+                                                                                placeholder: collections.DAYS_LC
+                                                                            }, attr:{'title': collections.DAYS_LC}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="scenario-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-scenario" data-bind="text: scenarioLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <select id="collections-search-scenario" data-bind="attr:{'title': scenarioLabel} , ojComponent: {component: 'ojSelect',value: selectedScenarioOption}">
+                                                        <option value="-1" data-bind="text: paymentSuspense.OPT_ANY"></option>
+                                                        <!-- ko foreach: scenarioOptions -->
+                                                        <option data-bind="value: id, text: name"></option>
+                                                        <!-- /ko -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="profile-filter">
+                                            <div class="oj-flex filter-header">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <label for="collections-search-profile" data-bind="text: profileLabel"
+                                                           class="payment-suspense-search-filter-label"></label>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex">
+                                                <div class="oj-flex-item oj-lg-12">
+                                                    <select id="collections-search-profile" data-bind="attr:{'title': profileLabel} , ojComponent: {component: 'ojSelect',value: selectedProfileOption}">
+                                                        <option value="-1" data-bind="text: paymentSuspense.OPT_ANY"></option>
+                                                        <!-- ko foreach: profileOptions -->
+                                                        <option data-bind="value: id, text: name"></option>
+                                                        <!-- /ko -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="oj-flex updateButton">
+                                        <div class="oj-flex-item oj-lg-4">
+                                            <div class="padding10px">&nbsp;</div>
+                                        </div>
+                                        <input id="inputButton" type="button" class="oj-flex-item oj-lg-4 font-size-inherit"
+                                               data-bind="click: syncAndCloseHandler, ojComponent: {component: 'ojButton', label: paymentSuspense.UPDATE}, attr: {'title': paymentSuspense.CLOSE_HINT} "/>
+                                        <div class="oj-flex-item oj-lg-4">
+                                            <div class="padding10px">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>

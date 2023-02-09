@@ -1,0 +1,35 @@
+
+#fiscalization-result{
+    overflow: scroll;
+}
+#fiscalization-result-criteria{
+    height: fit-content;
+}
+#fiscalization-result-container{
+    background: #fff;
+}
+.set_custom_width {
+    width: 60%;
+}
+
+.intro-printer-icon{
+    background:transparent;
+    width: 46px;
+    height: 46px;
+    float: left;
+    margin: 14px 14px 0 50px;
+}
+
+.disabled{
+    pointer-events: none;
+}
+
+.fiscalization-account-number{
+    font-size:1em;
+    color:black
+}
+
+.fiscalization-result-img-section {
+    float: left;
+    margin-top: 10px;
+}

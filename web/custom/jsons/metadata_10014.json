@@ -1,0 +1,22 @@
+{
+  "type" : "Inter Bank Payment order",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment10014",
+  "internalStruct" : "payOrderInfo",
+  "fields" : [ {
+    "label" : "Date",
+    "datatype" : "date",
+    "fieldName" : "effectiveDate"
+  }, {
+    "label" : "Order ID",
+    "datatype" : "string",
+    "fieldName" : "orderId"
+  }, {
+    "label" : "Bank Code",
+    "datatype" : "string",
+    "fieldName" : "bankCode"
+  }, {
+    "label" : "Bank Account Number",
+    "datatype" : "string",
+    "fieldName" : "bankAccountNo"
+  } ]
+}

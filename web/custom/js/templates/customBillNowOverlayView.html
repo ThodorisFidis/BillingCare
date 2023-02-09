@@ -1,0 +1,31 @@
+<div id="oj-over-dialog" tabindex="1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+    <div id="overlays" class="ui-widget">
+        <section class="clearfix">
+            <h3 class="overlayTitle"  style="margin-top: 3px" id="TITLE_ID_BILL_NOW" data-bind="text: title"> </h3>
+            <div class="overlayBody oj-dialog-body center">
+            </div>
+            <div style="padding-left: 2%">
+                <input type="checkbox" id="nextBillingDate">
+                <label class="label" for="nextBillingDate">Next Billing Date</label> 
+            </div>
+            <div style="padding-left: 2%">
+                <input type="checkbox" id="IncludeCharges">
+                <label class="label" for="IncludeCharges">Include charges (recurring & one-off)</label> <!-- Obracunati pretplatu -->
+            </div>
+            <div style="padding-left: 2%">
+                <input type="checkbox" id="IncludeCreditInstallment" >
+                <label class="label" for="IncludeCreditInstallment">Include credit installment</label> <!-- Obracunati rate kredita -->
+            </div>
+            <div style="padding-left: 2%">
+                <input type="checkbox" id="IncludeAllInstallments">
+                <label class="label" for="IncludeAllInstallments">Include all installments</label> <!-- ObraÄunati jednokratna/stalna -->                              
+            </div>
+            <div class="oj-dialog-footer" style="padding: 10px 0 0">
+                <button id="buttonOK" href="#" data-bind="click: OkAction">Bill Now</button>
+                <label class="marginTop10px"></label>&nbsp
+                <button id="buttonOK" href="#" data-bind="click: callListing, event: { keyup : callListingOnClick}">Call Listing</button>     
+                <label style="margin-bottom: 10px"></label>&nbsp
+            </div>
+        </section>
+    </div>
+</div>

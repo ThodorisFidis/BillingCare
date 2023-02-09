@@ -1,0 +1,401 @@
+<div id="collections-search-container">
+    <div class="oj-flex max-width" tabindex="-1">
+
+        <div id="fiscalization-close" class="oj-flex-item oj-lg-12 close-button">
+            <div class="oj-flex-item oj-lg-11" align="right">
+                <a href="javascript:void(0);" style="color: #045fab;" data-bind="click: close, 
+                            event: {keypress: closeOnKeyPress}">Close</a>
+            </div>
+            <div class="oj-flex-item oj-lg-12" align="center">
+                <h2>Fiscalization</h2>
+            </div>
+        </div>
+
+        <div id = "fiscalization-select-criteria" style="background: #f5f7f5;height: 90%"  class="oj-flex-item oj-lg-2 criteria">
+            <div class="page-navigator-sidebar-entry clearfix" id="option1" style="height: 15%" data-bind="click: showIndividualFiscalItems,event: {keypress: showIndividualFiscalItemsOnClick}">
+                <div>
+                    <span class="label-large" style="padding-left: 0px">Missing Individual Fiscal Items</span>
+                </div>
+            </div>
+            <hr>
+            <div class="page-navigator-sidebar-entry clearfix" id="option2" style="height: 15%" data-bind="click: showGroupedFiscalItems,event: {keypress: showGroupedFiscalItemsOnClick}">
+                <div>
+                    <span class="label-large" style="padding-left: 0px">Grouped Fiscal Items</span>                
+                </div> 
+            </div>
+            <hr>
+            <div class="page-navigator-sidebar-entry clearfix" id="option3" style="height: 15%" data-bind="click: showCorrectedFiscalItems,event: {keypress: showCorrectedFiscalItemsOnClick}">
+                <div>
+                    <span class="label-large" style="padding-left: 0px">Corrected Fiscal Items</span>
+                </div> 
+            </div>
+        </div>
+
+
+        <div id = "fiscalization-result-criteria" style="color: #f5f7f5;height: 90%" class="oj-flex-item oj-lg-10 criteria">
+
+
+            <!-- ko if: showInitialMsg2() === true  -->
+            <div class="oj-flex initial-msg">
+                <div class="no-records-image dimensions"></div>
+                <div>What do you want to search for?</div>
+            </div>
+            <!-- /ko -->
+
+
+            <div id="fiscalization-telekom-select" class="oj-flex oj-lg-12">
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-2" align="left">
+                        <oj-label>Telekom centar</oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6" align="left">
+                        <select data-bind="options: availableDirectorates,
+                                                      optionsText: 'directorateName',
+                                                      value: selectedDirectorate,
+                                                      event: {change: getIndividualFiscalRecords},
+                                                      disable: $root.isReadOnly,
+                                                      optionsCaption: mockselectedDirectorate" style="width: 40%">                                                
+                        </select>
+                    </div>
+
+                    <div class="oj-flex-item oj-lg-4">
+
+                        <div class="oj-flex-item oj-lg-2 paddingTop10px ">
+
+                        </div>
+                        <div class="oj-flex-item oj-lg-2">
+
+                        </div>
+                        <div class="oj-flex-item oj-lg-8">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+
+            <div id="fiscalization-result-container" style = "height: inherit" class="oj-flex-item oj-xl-12">
+                <hr>
+                <!-- ko if: recordsCount() ===  0 && showInitialMsg() === false  -->
+                <div class="oj-flex">
+                    <div class="oj-flex-item lg-lg-12 text-align-center"><span data-bind="text: labelNoRecords" class="label-medium" id="no_records_found"></span></div>
+                </div> 
+                <!-- /ko -->
+
+                <div id="fiscalization-result" style="overflow-x: hidden; overflow-y: auto;height: inherit" class="oj-flex result">
+                    <div class="width100">
+                        <div class="oj-flex close-button"  id="fiscalization-result-list">
+                            <div class="oj-flex-item oj-lg-12" style="color: #045fab;" align="left"><b>Lista zahtjeva</b></div>                          
+                        </div>
+                        <ul id="fiscalization-search-result" 
+                            data-bind="ojComponent: {
+                                          component: 'ojListView',
+                                          data: dataSource,
+                                          selectionMode: 'single',
+                                          item: {template: 'server_template'}}"></ul>
+                        <script type="text/html" id="server_template">
+                            <li label="Fiscalization Search Result Record">   
+                                <div class="oj-flex">
+                                    <div class="oj-flex oj-lg-11">
+                                        <div class="fiscalization-result-img-section" style="width: 13%" align="right">                                       
+                                            <span class="fiscalization-account-number"><b>Nalog</b></span>
+                                            <input data-bind="textInput:orderNumber" style="width: 65%" readonly="readonly">
+                                            <br>                              
+                                            <span class="fiscalization-account-number"><b>PDV</b></span>
+                                            <input data-bind="textInput:taxCodeUIFormat" style="width: 65%" readonly="readonly">
+                                        </div>
+                                        <div class="fiscalization-result-img-section" style="width: 17%" align="right">
+                                            <span class="fiscalization-account-number"><b>Datum</b></span>
+                                            <input data-bind="textInput:creationDate" style="width: 68%" readonly="readonly">
+                                            <br>
+                                            <span class="fiscalization-account-number"><b>Radnik</b></span>
+                                            <input data-bind="textInput:userCode" style="width: 68%" readonly="readonly">
+                                        </div>
+                                        <div class="fiscalization-result-img-section" style="width: 33%"align="right">
+                                            <span class="fiscalization-account-number"><b>Naziv Usluge</b></span>
+                                            <input data-bind="textInput:productObj" style="width: 75%" readonly="readonly">
+                                            <br>
+                                            <span class="fiscalization-account-number"><b>Naziv</b></span>
+                                            <input data-bind="textInput:customerName" style="width: 75%" readonly="readonly">
+                                        </div>    
+                                        <div class="fiscalization-result-img-section" style="width: 17%" align="right">
+                                            <span class="fiscalization-account-number"><b>Ba Id</b></span>
+                                            <input data-bind="textInput:accountNo" style="width: 70%" readonly="readonly">
+                                            <br>
+                                            <span class="fiscalization-account-number"><b>Userid</b></span>
+                                            <input data-bind="textInput:userId" style="width: 70%" readonly="readonly">
+                                        </div>
+                                        <div class="fiscalization-result-img-section" style="width: 20%" align="right">
+                                            <span class="fiscalization-account-number"><b>Rbr računa</b></span>
+                                            <input data-bind="textInput:rsSeqNo" style="width: 38%" readonly="readonly">
+                                            <br>
+                                            <span class="fiscalization-account-number"><b>Fiskalni printer</b></span>
+                                            <input data-bind="textInput:printerId" style="width: 38%" readonly="readonly">
+                                            <br>
+                                            <span class="fiscalization-account-number"><b>Fiskalni broj računa</b></span>
+                                            <input data-bind="textInput:billNumber" style="width: 38%" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex oj-lg-1">
+                                        <div class="oj-button-label">
+                                            <oj-bind-if test="billNumber !== ''">
+                                                <button data-bind="attr: {id: $data['accountNo']},
+                                                                                click: $root.updateIndividualFiscalRecord"disabled>Štampa
+                                                </button> 
+                                            </oj-bind-if>
+                                            <oj-bind-if test="billNumber == ''">
+                                                <button data-bind="attr: {id: $data['accountNo']},
+                                                                                click: $root.updateIndividualFiscalRecord" >Štampa
+                                                </button> 
+                                            </oj-bind-if>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </li>    
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="grouped-fiscalization-select-parameters" class="oj-flex oj-lg-12">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-1" align="left">
+                            <oj-label>Telekom centar </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-2">
+                            <select data-bind="options: availiableGroupedDirectorates,
+                                                      optionsText: 'directorateName',
+                                                      value: selectedGroupedDirectorate,
+                                                      disable: $root.isReadOnly,
+                                                      optionsCaption: mockSelectedGroupedDirectorate" style="width: 80%">                                                
+                            </select>
+                        </div>
+                        <div class="oj-flex-item oj-lg-1" align="left">
+                            <oj-label>Tehnologija</oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-2" align="left">
+                            <select data-bind="options: availiableGroupedTechnologes,
+                                                      optionsText: 'technologyCode',
+                                                      value: selectedGroupedTechnology,
+                                                      disable: $root.isReadOnly,
+                                                      optionsCaption: mockSelectedGroupedTechnology" style="width: 60%">                                                
+                            </select>
+                        </div>
+                        <div class="oj-flex-item oj-lg-1" align="left">
+                            <oj-label>Period knjizenja</oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-1">
+                            <input type="text" data-bind="textInput: selectedGroupedAccountingPeriod" placeholder="YYMM" style="width: 60%">  
+                        </div>
+                        <div class="oj-flex oj-lg-1" align="center">
+                            <button id="resetButton" style="align-self: start" data-bind="click: $root.getGroupedRecords">Search</button>
+                        </div>
+                        <div class="oj-flex oj-lg-1">
+                            <button id="createGroupItems" style="align-self: start" data-bind="click: $root.createFiscalItems">Create Fiscal Items</button>
+                        </div> 
+                    </div>
+                </div> 
+
+                <div id="grouped-fiscalization-result-container" style="height: inherit" class="oj-flex-item oj-lg-12">
+                    <hr>
+                    <!-- ko if: recordsCountGroup() ===  0   -->
+                    <div class="oj-flex">
+                        <div class="oj-flex-item lg-lg-12 text-align-center"><span data-bind="text: labelNoRecords" class="label-medium" id="no_records_found"></span></div>
+                    </div> 
+                    <!-- /ko -->
+
+                    <div id="grouped-fiscalization-result" style="height: inherit" class="oj-flex result">
+                        <div class="width100">
+                            <div class="oj-flex close-button"  id="grouped-fiscalization-result-list">
+                                <div class="oj-flex-item oj-lg-12" style="color: #045fab;" align="left"><b>Lista zahtjeva</b></div>                          
+                            </div>
+                            <ul id="grouped-fiscalization-search-result" 
+                                data-bind="ojComponent: {
+                                          component: 'ojListView',
+                                          data: dataSourceGroup,
+                                          selectionMode: 'single',
+                                          item: {template: 'server_template2'}}"></ul>
+                            <script type="text/html" id="server_template2">
+                                <li label="Group Fiscalization  Search Result Records">   
+                                    <div class="oj-flex">
+                                        <div class="oj-flex oj-lg-11">
+                                            <div class="fiscalization-result-img-section" style="width: 29%" align="right">                                       
+                                                <span class="fiscalization-account-number"><b>Telekom Centar</b></span>
+                                                <input data-bind="textInput:dirDescription" style="width: 68%" readonly="readonly">       
+                                            </div>
+                                            <div class="fiscalization-result-img-section" style="width: 12%" align="right">
+                                                <span class="fiscalization-account-number"><b>Tehnologija</b></span>
+                                                <input data-bind="textInput:technologyCode" style="width: 30%" readonly="readonly">
+                                            </div>
+                                            <div class="fiscalization-result-img-section" style="width: 23%" align="right">
+                                                <span class="fiscalization-account-number"><b>Naziv Usluge</b></span>
+                                                <input data-bind="textInput:description" style="width: 60%" readonly="readonly">
+                                            </div>
+                                            <div class="fiscalization-result-img-section" style="width: 10%"align="right">
+                                                <span class="fiscalization-account-number"><b>Iznos</b></span>
+                                                <input data-bind="textInput:netAmount" style="width: 55%" readonly="readonly">
+                                            </div>
+                                            <div class="fiscalization-result-img-section" style="width: 6%"align="right">
+                                                <span class="fiscalization-account-number"><b>PDV</b></span>
+                                                <input data-bind="textInput:taxCodeUIFormat" style="width: 25%" readonly="readonly">
+                                            </div>    
+                                            <div class="fiscalization-result-img-section" style="width: 20%" align="right">
+                                                <span class="fiscalization-account-number"><b>Fiskalni printer</b></span>
+                                                <input data-bind="textInput:printerId" style="width: 38%" readonly="readonly">  
+                                                <br>
+                                                <span class="fiscalization-account-number"><b>Fiskalni broj računa</b></span>
+                                                <input data-bind="textInput:billNumber" style="width: 38%" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="oj-flex oj-lg-1">
+                                            <div class="oj-button-label">
+                                                <oj-bind-if test="billNumber !== ''">
+                                                    <button data-bind="attr: {id: $data['description']},
+                                                                                click: $root.updateGroupedRecords"disabled>Štampa
+                                                    </button> 
+                                                </oj-bind-if>
+                                                <oj-bind-if test="billNumber == ''">
+                                                    <button data-bind="attr: {id: $data['description']},
+                                                                                click: $root.updateGroupedRecords" >Štampa
+                                                    </button> 
+                                                </oj-bind-if>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </li>    
+                                </script>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div id="corrected-fiscalization-select-parameters" class="oj-flex-item oj-lg-12">                
+                        <div class="oj-flex">
+                            <div class="oj-flex-item oj-lg-1" align="left">
+                                <oj-label>Telekom centar </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-2">
+                                <select data-bind="options: availiableCorrectDirectorates,
+                                                      optionsText: 'directorateName',
+                                                      value: selectedCorrectDirectorate,
+                                                      disable: $root.isReadOnly,
+                                                      optionsCaption: mockSelectedCorrectDirectorate" style="width: 80%">                                                
+                                </select>
+                            </div>
+                            <div class="oj-flex-item oj-lg-1" align="left">
+                                <oj-label>Tehnologija</oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-1">
+                                <select data-bind="options: availiableCorrectTechnologes,
+                                                      optionsText: 'technologyCode',
+                                                      value: selectedCorrectTechnology,
+                                                      disable: $root.isReadOnly,
+                                                      optionsCaption: mockSelectedCorrectTechnology"style="width: 60%">                                                
+                                </select>
+                            </div>
+                            <div class="oj-flex-item oj-lg-1" align="left">
+                                <oj-label>Period knjizenja</oj-label> 
+                            </div>
+                            <div class="oj-flex-item oj-lg-1">
+                                <input type="text" data-bind="textInput: selectedCorrectAccountingPeriod" placeholder="YYMM" style="width: 60%">  
+                            </div>
+                            <div class="oj-flex oj-lg-1" align="center">
+                                <button id="serachButton" style="align-self: start" data-bind="click: $root.getCorrectionsRecords">Search</button>
+                            </div> 
+                            <div class="oj-flex oj-lg-1"> 
+
+                            </div>
+                            <div class="oj-flex oj-lg-1" > 
+                                <button id="batchCreate" style="align-self: start" href="javascript:void(0);" data-bind="click: $root.createCorrectionsFiscalItems">Create Corrections</button>
+                            </div>
+                            <div class="oj-flex oj-lg-1" style = "padding-left: 10px" align="center">
+                                <button id="batchPrint" style="align-self: start" href="javascript:void(0);" data-bind="click: $root.batchSubmit">Batch Submit</button>
+                            </div> 
+                            <div class="oj-flex oj-lg-1" align="right">
+                                <button id="showInvoice" style="align-self: start" href="javascript:void(0);" data-bind="click: $root.showReport">Corrections Report</button>
+                            </div> 
+                        </div>  
+                    </div>
+
+                    <div id="corrected-fiscalization-result-container" style="height: inherit" class="oj-flex-item oj-lg-12">
+                        <hr>
+                        <!-- ko if: recordsCountCorrect() ===  0   -->
+                        <div class="oj-flex">
+                            <div class="oj-flex-item lg-lg-12 text-align-center"><span data-bind="text: labelNoRecords" class="label-medium" id="no_records_found"></span></div>
+                        </div> 
+                        <!-- /ko -->
+
+                        <div id="corrected-fiscalization-result" style="height: inherit" class="oj-flex result">
+                            <div class="width100">
+                                <div class="oj-flex close-button"  id="corrected-fiscalization-result-list">
+                                    <div class="oj-flex-item oj-lg-12" style="color: #045fab;" align="left"><b>Štampa pojedinačnih fiskalnih računa</b></div>                          
+                                </div>
+                                <ul id="corrected-fiscalization-search-result" 
+                                    data-bind="ojComponent: {
+                                          component: 'ojListView',
+                                          data: dataSourceCorrected,
+                                          selectionMode: 'single',
+                                          item: {template: 'server_template3'}}"></ul>
+                                <script type="text/html" id="server_template3">
+                                    <li label="Corrected Fiscalization  Search Result Records">   
+                                        <div class="oj-flex">
+                                            <div class="oj-flex oj-lg-10">
+                                                <div class="fiscalization-result-img-section" style="width: 16%"align="right">                                       
+                                                    <span class="fiscalization-account-number"><b>Tip korekcije</b></span>
+                                                    <input data-bind="textInput:adjustmentType" style="width: 40%"readonly="readonly">   
+                                                </div>
+                                                <div class="fiscalization-result-img-section" style="width: 20%"align="right">                                                 
+                                                    <span class="fiscalization-account-number"><b>Fiscalni broj</b></span>
+                                                    <input data-bind="textInput:fiscalNumber" style="width: 45%"readonly="readonly">
+                                                </div>
+                                                <div class="fiscalization-result-img-section" style="width: 11%" align="right">
+                                                    <span class="fiscalization-account-number"><b>Rbr računa</b></span>
+                                                    <input data-bind="textInput:rsSeqNoUI" style="width: 25%" readonly="readonly">
+                                                </div>
+                                                <div class="fiscalization-result-img-section" style="width: 7%" align="right">
+                                                    <span class="fiscalization-account-number"><b>PDV</b></span>
+                                                    <input data-bind="textInput:taxCodeUIFormat" style="width: 30%" readonly="readonly">
+                                                </div>
+                                                <div class="fiscalization-result-img-section" style="width: 11%" align="right">
+                                                    <span class="fiscalization-account-number"><b>Iznos</b></span>
+                                                    <input data-bind="textInput:amount" style="width: 55%" readonly="readonly">
+                                                </div>
+                                                <div class="fiscalization-result-img-section" style="width: 15%"align="right">
+                                                    <span class="fiscalization-account-number"><b>Status</b></span>
+                                                    <input data-bind="textInput:adjustmentStatusUI" style="width: 60%" readonly="readonly">
+                                                </div>
+                                                <div class="fiscalization-result-img-section" style="width: 20%"align="right">
+                                                    <span class="fiscalization-account-number"><b>Fiskalni reklamirani</b></span>
+                                                    <input data-bind="textInput:adjFiscalNumber" style="width: 30%" readonly="readonly">
+                                                </div>    
+                                            </div>                                           
+                                            <div class="oj-flex oj-lg-1"> 
+                                                <div class="oj-button-label"> 
+                                                    <oj-bind-if test="adjustmentStatus === 0 || adjustmentStatus === 3">
+                                                        <button data-bind="attr: {id: $data['fiscalNumber']},
+                                                                                click: $root.updateCorrectionsRecord">Obrada</button>                                                       
+                                                    </oj-bind-if>                                                          
+                                                    <oj-bind-if test="adjustmentStatus !== 0 && adjustmentStatus !== 3" >
+                                                        <button disabled>Obrada</button>                                                       
+                                                    </oj-bind-if>   
+                                                </div> 
+                                            </div>
+                                            <div class="oj-flex oj-lg-1"> 
+                                                <div class="oj-button-label">  
+                                                    <oj-bind-if test="adjustmentStatus === 1 && rsSeqNo === 0">
+                                                        <button data-bind="attr: {id: $data['fiscalNumber']},
+                                                                                click: $root.cancelDuplicateButton">Poništi dupli</button>
+                                                    </oj-bind-if>  
+                                                    <oj-bind-if test="adjustmentStatus !== 1 || rsSeqNo !== 0">
+                                                        <button disabled>Poništi dupli</button>
+                                                    </oj-bind-if>                                                    
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </li>    
+                                    </script>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

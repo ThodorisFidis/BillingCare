@@ -1,0 +1,10 @@
+{
+  "type" : "Failed",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment10017",
+  "internalStruct" : "paymentFailedInfo",
+  "fields" : [ {
+    "label" : "Payment Transaction Id",
+    "datatype" : "string",
+    "fieldName" : "paymentTransId"
+  } ]
+}

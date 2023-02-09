@@ -1,0 +1,9 @@
+{
+    "elements": {
+        "oj-label": {},
+        "oj-button": {},
+        "oj-select-single": {},
+        "oj-select-one": {}
+    },
+    "attributes": {}
+}

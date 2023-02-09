@@ -1,0 +1,14 @@
+{
+  "type" : "Virtualna Uplata Prenos Potraživanja",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment11000",
+  "internalStruct" : "bhtFldVirtualInfo",
+  "fields" : [ {
+    "label" : "Reason Code",
+    "datatype" : "string",
+    "fieldName" : "reasonCode"
+  }, {
+    "label" : "Chargeback Date",
+    "datatype" : "date",
+    "fieldName" : "effectiveDate"
+  } ]
+}

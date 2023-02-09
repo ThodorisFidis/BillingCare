@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configurations xmlns="http://xmlns.oracle.com/cgbu/schemas/BusinessObjs">
+    <keyvals>
+        <key>accountBannerSections</key>
+        <value>accountBannerContact,accountBannerAccountInfo,accountBannerCollections,accountBannerBillUnits,accountBannerVIPInfo</value>
+        <desc>Comma seperated Registry keys for views to be displayed in the Account Banner. Views can be rearranged/deleted/added by modifiying order of these keys.</desc>
+    </keyvals>
+    <keyvals>
+        <key>appCookieAttribute</key>
+        <value></value>
+        <desc>Semicolon separated attributes to be added to all application cookies (Ex:- samesite=none; secure;)</desc>
+    </keyvals>
+    <keyvals>
+        <key>financialSetup.tabs</key>
+        <value>[{"key": "paymentMethods", "editable": false, "subcontent":[{"key":"newPaymentMethod", "editable": true}, {"key":"editPaymentMethod", "editable": true}]} ,{"key":"billUnits","editable": false,"subcontent":[{"key":"newBillUnit", "editable": true},{"key": "editBillUnit", "editable": true},{"key": "moveServices", "editable": true}]},{"key": "taxSetup", "editable": true}]</value>
+        <desc>Financial setup page navigator pages configuration used to configure the page navigator. Order of tabs is same as described. Editable attribtute true will show the "Apply or cancel" link and false will show the "close" buttton.</desc>
+    </keyvals>
+    <keyvals>
+        <key>sharingGroups.tabs</key>
+        <value>[{"key": "chargeSharingGroup", "editable": false, "subcontent":[{"key":"newChargeShare", "editable": true}, {"key":"editChargeSharingGroupOwner", "editable": true}, {"key":"chargeSharingGroupMembers", "editable": false, "subcontent":[{"key":"editChargeSharingGroupMember", "editable": true, "grandParent": "chargeSharingGroup"}]},{"key":"editChargeSharingGroupMemberPriority", "editable": true}]}, {"key":"discountSharingGroup","editable": false,"subcontent":[{"key":"newDiscountShare", "editable": true}, {"key":"editDiscountSharingGroupOwner", "editable": true}, {"key":"discountSharingGroupMembers", "editable": false,"subcontent":[{"key":"editDiscountSharingGroupMembers", "editable": true,"grandParent":"discountSharingGroup"}]},{"key":"editDiscountSharingGroupMemberPriority", "editable": true}]}, {"key":"collectionsGroup", "editable": false, "subcontent":[{"key":"newCollectionsGroup", "editable": true}, {"key":"editCollectionsGroup", "editable": true}, {"key":"collectionsGroupMembers", "editable": false}]}, {"key":"profileSharingGroup","editable": false, "subcontent":[{"key":"newProfileShare", "editable": true}, {"key":"editProfileSharingGroupOwner", "editable": true},{"key":"profileSharingGroupMembers", "editable": false, "subcontent":[{"key":"editProfileSharingGroupMember", "editable": true, "grandParent": "profileSharingGroup"}]}]}]</value>
+        <desc>Sharing Groups page navigator pages configuration used to configure the page navigator. Order of tabs is same as described. Editable attribtute true will show the "Apply or cancel" link and false will show the "close" buttton.</desc>
+    </keyvals>
+    <keyvals>
+        <key>newsfeed.categories</key>
+        <value>[{"key":"ALL","newsfeedTypes": "ADJUSTMENT:true, NCR_ADJUSTMENT:true, OPEN_DISPUTE:true, CLOSED_DISPUTE:true, WRITEOFF:true, WRITEOFF_REVERSAL:true, REFUND:true, COLLECTIONS:true, PAYMENT:true, PAYMENT_REVERSAL:true, PAYMENT_METHOD_ASSIGNMENT_CHANGE:true, PAYINFO:true, NAMEINFO:true, ACCT_STATUS:true, BILLINFO:true, BILLINFO_CREATED:true, BILLINFO_DELETED:true, DEFERRED:true, SRVC_STATUS:true, SRV_TO_DEV:true, PURCHASE:true, CANCEL:true, CORRECTIVE_BILL:true, RECURRING_CHARGE:true,OFFER_STATUS:true, BILL_ISSUED:true, BILL_ISSUED_MID_CYCLE:true, ONE_TIME_CHARGE:true, BALANCE_GROUP_TRANSFER:true, SHARING_GROUPS:true, TRANSITION:true, LIMIT_CHANGE:true", "selected": true},
+                {"key":"AR", "newsfeedTypes": "ADJUSTMENT:true, NCR_ADJUSTMENT:true, OPEN_DISPUTE:true, CLOSED_DISPUTE:true, WRITEOFF:true, WRITEOFF_REVERSAL:true, REFUND:true, COLLECTIONS:true, LIMIT_CHANGE:true"},
+                {"key":"PAYMENTS","newsfeedTypes": "PAYMENT:true, PAYMENT_REVERSAL:true, PAYMENT_METHOD_ASSIGNMENT_CHANGE:true, PAYINFO:true"},
+                {"key":"CHARGES","newsfeedTypes": "PURCHASE:true, CANCEL:true, OFFER_STATUS:true , CORRECTIVE_BILL:true, RECURRING_CHARGE:true, BILL_ISSUED:true, BILL_ISSUED_MID_CYCLE:true, ONE_TIME_CHARGE:true, TRANSITION:true"},
+                {"key":"ACCOUNT","newsfeedTypes": "NAMEINFO:true, ACCT_STATUS:true, DEFERRED:true, SRVC_STATUS:true,  SRV_TO_DEV:true, BILLINFO:true, BILLINFO_CREATED:true, BILLINFO_DELETED:true, BALANCE_GROUP_TRANSFER:true, SHARING_GROUPS:true"}]</value>
+        <desc>Within the newsfeed, sub-categories for various newsfeed categories</desc>
+    </keyvals>
+    <keyvals>
+	<key>authorizationJSON</key>
+	<value>[{"extension":null,"resourceName":"IFRS9EditSSRatesResource","grantedActions":["Edit"],"deniedActions":[]},{"extension":null,"resourceName":"FiscalizationResource","grantedActions":["Visible"],"deniedActions":[]},{"extension":null,"resourceName":"CustomPageResource","grantedActions":["Visible"],"deniedActions":[]},{"extension":null,"resourceName":"SuperUserResource","grantedActions":["Visible"],"deniedActions":[]},{"extension":null,"resourceName":"ReadOnlyResource","grantedActions":[],"deniedActions":["ANY"]},{"extension":null,"resourceName":"PaymentResource","grantedActions":["Audit","SuspenseReverse","ReassignHandler","SuspenseMove","SuspenseAllocate","Reverse","Allocate","SuspenseAccess","SuspenseMake","Make","BatchProcess"],"deniedActions":[]},{"extension":null,"resourceName":"AdjustmentResource","grantedActions":[],"deniedActions":["Allocate","Make"]},{"extension":null,"resourceName":"WriteoffResource","grantedActions":[],"deniedActions":["Make"]},{"extension":null,"resourceName":"AdjustmentNonCurrencyResource","grantedActions":["Make"],"deniedActions":[]},{"extension":null,"resourceName":"DisputeResource","grantedActions":[],"deniedActions":["Settle","Raise"]},{"extension":null,"resourceName":"AccountResource","grantedActions":["View","Search","Transition","Modify","Make"],"deniedActions":[]},{"extension":null,"resourceName":"ConfigurationArtifactsResource","grantedActions":["View"],"deniedActions":[]},{"extension":null,"resourceName":"InvoiceImageResource","grantedActions":["View"],"deniedActions":[]},{"extension":null,"resourceName":"NoteResource","grantedActions":["Comment"],"deniedActions":[]},{"extension":null,"resourceName":"PaymentMethodResource","grantedActions":["Add","Delete","Modify"],"deniedActions":[]},{"extension":null,"resourceName":"TaxExemptionResource","grantedActions":["Add","Delete","Modify"],"deniedActions":[]},{"extension":null,"resourceName":"BillUnitResource","grantedActions":["Add","Delete","Modify"],"deniedActions":[]},{"extension":null,"resourceName":"ProfileResource","grantedActions":["View","Add","Delete","Modify"],"deniedActions":[]},{"extension":null,"resourceName":"RefundResource","grantedActions":["Make"],"deniedActions":[]},{"extension":null,"resourceName":"BillResource","grantedActions":["BillNow"],"deniedActions":[]},{"extension":null,"resourceName":"CollectionsResource","grantedActions":["Perform","Exempt","Promise","Exit","Replace","ModifyAction","AddAction","Delete","DeleteMember","AddMember","ReassignHandler","Search"],"deniedActions":[]},{"extension":null,"resourceName":"ServiceResource","grantedActions":["Reactivate","Terminate","Edit","OfferTerminate","Cancel","OfferReactivate","OfferInactivate","Inactivate","Make"],"deniedActions":[]}]</value>
+	<desc>Add custom permission</desc>
+    </keyvals>        
+    <keyvals>
+        <key>search.options</key>
+        <value>[{"searchTemplateKey": "accountSearch", "searchTemplateName":"SEARCH_OPTION_ACCOUNTS", "defaultSearch": true},
+                {"searchTemplateKey": "billSearch", "searchTemplateName":"SEARCH_OPTION_BILLS", "defaultSearch": false}]</value>
+        <desc>Here searchTemplateKey will act as the value of the search dropdown option.
+            The value of searchTemplateKey i.e. accountSearch will act as search template name
+            The searchTemplateName corresponds to the text of search dropdown option
+            The value of searchTemplateName i.e. SEARCH_OPTION_ACCOUNTS corresponds to the key to resource bundle
+        </desc>
+    </keyvals>
+     <keyvals>
+        <key>cssFiles</key>
+        <value>{"availablethemes": [{"name" :"css/theme_alta.css" ,"activeTheme" : true}, {"name" :"css/theme_default.css", "activeTheme" : false}]}</value>
+        <desc>List of all available css files, 'true' entry of activeTheme key represent the active theme</desc>
+    </keyvals>
+    <keyvals>
+        <key>batchPaymentsDirectoryName</key>
+        <value>BatchPaymentFiles</value>
+        <desc>Parent directory name used for batch payments.</desc>
+    </keyvals>
+    <keyvals>
+        <key>batchPaymentTypes</key>
+        <value>[{"type": "Cash Payment Batch","code": "10011","templateName":"cash_payment_template.pit"},{"type": "Check Payment Batch","code": "10012","templateName":"check_payment_template.pit"},{"type": "Wire-Transfer Payment Batch","code": "10013","templateName":"wire-transfer_payment_template.pit"},{"type": "Inter Bank Payment order Payment Batch","code": "10014","templateName":"interbankpayorder_payment_template.pit"},{"type": "Postal order Payment Batch","code": "10015","templateName":"postalorder_payment_template.pit"},{"type": "Failed Payment Batch","code": "10017","templateName":"failed_payment_template.pit"}]</value>
+        <desc>List of supported batch payment types</desc>
+    </keyvals>
+    <keyvals>
+        <key>brmserver.timezone</key>
+        <value></value>
+        <desc>
+            Holds the value of server time zone. If this entry is set, Billing Care will use the same for date processing.
+            By default, the entry is empty and weblogic's timezone is used. 
+
+            You can use either of the following options to specify the timezone value
+			
+            Option 1: Timezone name 
+            Use this option when your timezone is changing due to DST. This is the recommended option even if DST is not used. 
+            For example: America/Los_Angeles
+            Timezone name should be exactly same as the timezones supported by Java/Joda database at http://joda-time.sourceforge.net/timezones.html
+
+            Option 2: Offset value
+            If your timezone need to be constant/fixed, then you can use this option if needed. 
+            For example: +0430
+            Offset value should be 5 characters long, should start with a sign (+ or -), and should have hours followed by minutes.
+        </desc>
+    </keyvals>
+    <flags>
+        <key>account.contact.showsalutation</key>
+        <value>false</value>
+        <desc>Include the salutation field in the Account Profile overlay,Account Banner and in all the dialog titles.</desc>
+    </flags>
+    <flags>
+        <key>graph.notes.indicators</key>
+        <value>true</value>
+        <desc>Include notes indicators on the bill history graph</desc>
+    </flags>
+    <flags>
+        <key>accountbanner.showcurrencycode</key>
+        <value>false</value>
+        <desc>Displays the bill unit's ISO currency code in the account banner</desc>
+    </flags>
+    <flags>
+        <key>billinvoice.use.modaldialog</key>
+        <value>false</value>
+        <desc>Display the bill invoice in a modal dialog</desc>
+    </flags>
+    <flags>
+        <key>batch.payments.autoprocess</key>
+        <value>false</value>
+        <desc>Payment Batch Process is set to 'OFF' by default, If this is
+              enabled to true then the Batch payments imported in to the Batch Payments UI
+              will start processing automatically.
+        </desc>
+    </flags>
+    <thresholds>
+        <key>pagination.size</key>
+        <value>50</value>
+        <desc>Number of records retrieved per page across tables in Billing Care</desc>
+    </thresholds>
+    <thresholds>
+        <key>accountsearch.limit</key>
+        <value>50</value>
+        <desc>Maximum number of records to be retrieved in account search dialog. 
+            Default is 50, and increase or decrease the limit if you would like to see more or less records. 
+            Set a valid positive non-zero integer as a limit.
+        </desc>
+    </thresholds> 
+    <thresholds>
+        <key>billsearch.limit</key>
+        <value>25</value>
+        <desc>Maximum number of records to be retrieved in bill search dialog. 
+            Default is 25, and increase or decrease the limit if you would like to see more or less records. 
+            Set a valid positive non-zero integer as a limit.
+        </desc>
+    </thresholds>    
+    <thresholds>
+      <key>paymentsuspense.pagination.size</key>
+      <value>25</value>
+      <desc>pagination size for payment suspense search</desc>
+    </thresholds>
+    <thresholds>
+      <key>collections.pagination.size</key>
+      <value>25</value>
+      <desc>pagination size for collections bill unit search</desc>
+    </thresholds>
+    <thresholds>
+        <key>creditcard.alert.expirydays</key>
+        <value>60</value>
+        <desc>Number of days prior to credit card expiration to alert</desc>
+    </thresholds>
+    <thresholds>
+        <key>pcm.connection.timeout</key>
+        <value>15000</value>
+        <desc>Opcode timeout value. Changes will take affect the next time WebLogic is restarted</desc>
+    </thresholds>
+    <thresholds>
+        <key>session.timeout.advancewarningtime</key>
+        <value>60</value>
+        <desc>Number of seconds to warn user before Billing Care session timeout similar to the idle timeout in weblogic</desc>
+    </thresholds>
+    <thresholds>
+        <key>recent.records.size</key>
+        <value>5</value>
+        <desc>Number of recently opened accounts displayed in search overlay</desc>
+    </thresholds>    
+    <thresholds>
+        <key>package.alert.expirydays</key>
+        <value>60</value>
+        <desc>Number of days prior to expiration a package can be purchased during registration or package purchase</desc>
+    </thresholds>
+    <thresholds>
+        <key>batch.payments.threshold</key>
+        <value>50</value>
+        <desc>Threshold value for percentage of payments that are going into suspense.If exceeded batch payments processing will be terminated</desc>
+    </thresholds>
+    <thresholds>
+        <key>roles.batchsize</key>
+        <value>100</value>
+        <desc>Number of roles to be fetched in each batch while retrieving the role list from external LDAP.  
+            This configuration entry is introduced for performance reasons and there will not be any visible changes to Billing Care UI based on this configuration. For ex: if there are 5000 roles in the role store, retrieving all the roles in one shot may have timeout issues from the role store, hence this configuration entry is introduced to control the number of roles retrieved per batch internally. 
+            This is only applicable if both underlying repository and the provider support paging of results. By default, the value is 500. Set it to an optimal number based on the configurations in your environment. </desc>
+    </thresholds>
+    <thresholds>
+        <key>hierarchy.max.children</key>
+        <value>10</value>
+        <desc>Maximum number of children to be fetched for showing in organization hierarchy.</desc>
+    </thresholds>
+    <thresholds>
+        <key>hierarchy.max.accounts</key>
+        <value>10</value>
+        <desc>Maximum number of parent to be fetched for showing in organization hierarchy.</desc>
+    </thresholds>
+    <mapping>
+        <key>account.contact.types</key>
+        <map>
+            <id>1</id>
+            <key>PRIMARY</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>ADDITIONAL</key>
+        </map>
+        <map>
+            <id>3</id>
+            <key>ACCOUNTHOLDER</key>
+        </map>
+        <desc>Contact Types for account</desc>
+    </mapping>
+    <mapping> 
+        <key>account.status.types</key>
+        <map>
+            <id>10100</id>
+            <key>ACTIVE</key>
+        </map>
+        <map>
+            <id>10102</id>
+            <key>INACTIVE</key>
+        </map>
+        <map>
+            <id>10103</id>
+            <key>CLOSED</key>
+        </map>
+        <desc>Status Types for account.Note - It requires customizations in the BRM side to add a new status type</desc>
+    </mapping>
+    <mapping> 
+        <key>account.contact.phone.types</key>
+        <map>
+            <id>1</id>
+            <key>HOME</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>WORK</key>
+        </map>
+        <map> 
+            <id>3</id>
+            <key>FAX</key>
+        </map>
+        <map>
+            <id>4</id>
+            <key>PAGER</key>
+        </map>
+        <map>
+            <id>5</id>
+            <key>MOBILE</key>
+        </map>
+        <map>
+            <id>6</id>
+            <key>POP</key>
+        </map>
+        <map>
+            <id>7</id>
+            <key>SUPPORT</key>
+        </map>
+        <desc>Account Phone Types</desc>
+    </mapping>
+    <mapping>
+        <key>account.customer.types</key>
+        <map>
+            <id>1</id>
+            <key>PLATINUM</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>GOLD</key>
+        </map>
+        <map>
+            <id>3</id>
+            <key>SILVER</key>
+        </map>
+        <map>
+            <id>4</id>
+            <key>BRONZE</key>
+        </map>
+        <desc>Customer Types</desc>
+    </mapping>    
+    <mapping>
+        <key>account.locale.mapping</key>
+        <map>
+            <id>cs</id>
+            <key>cz</key>
+        </map>
+        <map>
+            <id>bg</id>
+            <key>bg_BG</key>
+        </map>
+        <map>
+            <id>hr</id>
+            <key>hr_HR</key>
+        </map>
+        <map>
+            <id>sl</id>
+            <key>sl_SI</key>
+        </map>
+        <map>
+            <id>nb</id>
+            <key>no</key>
+        </map>
+        <map>
+            <id>nn</id>
+            <key>no_NY</key>
+        </map>
+        <map>
+            <id>sv</id>
+            <key>sve</key>
+        </map>
+        <map>
+            <id>en_GB</id>
+            <key>en_UK</key>
+        </map>
+        <map>
+            <id>he</id>
+            <key>iw_IL</key>
+        </map>
+        <desc>As the browser language codes and BRM language codes are different (Not just hyphen replacement). This configuration acts like a mapping. ID represents browser language and key represents BRM language</desc>
+    </mapping>
+    <mapping>
+        <key>account.taxExemptions.types</key>
+        <map>
+            <id>0</id>
+            <key>FEDERAL</key>
+        </map>
+        <map>
+            <id>1</id>
+            <key>STATE</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>COUNTRY</key>
+        </map>
+        <map>
+            <id>3</id>
+            <key>CITY</key>
+        </map>
+        <map>
+            <id>4</id>
+            <key>SECONDARY_COUNTRY</key>
+        </map>
+        <map>
+            <id>5</id>
+            <key>SECONDARY_CITY</key>
+        </map>
+        <map>
+            <id>6</id>
+            <key>TERRITORY</key>
+        </map>
+        <map>
+            <id>7</id>
+            <key>SECONDARY_STATE</key>
+        </map>
+        <map>
+            <id>8</id>
+            <key>DISTRICT</key>
+        </map>
+        <map>
+            <id>9</id>
+            <key>SECONDARY_FEDERAL</key>
+        </map>
+        <desc>Tax Exemption Types. Note - Make sure BRM supports the tax exemption when you add a new type</desc>
+    </mapping>
+    <mapping>
+        <key>billUnit.billingFrequencyInMonths</key>
+        <map>
+            <id>1</id>
+            <key>MONTHLY</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>BI_MONTHLY</key>
+        </map>
+        <map>
+            <id>3</id>
+            <key>QUARTERLY</key>
+        </map>
+        <map>
+            <id>12</id>
+            <key>ANNUAL</key>
+        </map>
+        <desc>Billing Frequency Options for Bill Unit.Note: SDK developer can add "6" months as an option in the drop down</desc>
+    </mapping>
+    <mapping>
+        <key>billUnit.accountingTypes</key>
+        <map>
+            <id>1</id>
+            <key>OPEN_ITEM</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>BALANCE_FORWARD</key>
+        </map>
+        <desc>Accounting Types for Bill Unit.Note : BRM only supports Balance forward, and Open item accounting. If you are adding a new accounting type, make sure you have done the necessary customizations in BRM side.</desc>
+    </mapping>
+    <mapping>
+        <key>billUnit.correctiveInvoiceType</key>
+        <map>
+            <id>0</id>
+            <key>REPLACEMENT_INVOICE</key>
+        </map>
+        <map>
+            <id>4</id>
+            <key>CORRECTIVE_INVOICE</key>
+        </map>
+        <desc>Supported corrective invoice types for a bill unit.</desc>
+    </mapping>
+    <mapping>
+        <key>paymentTypes</key>
+        <map>
+            <id>10003</id>
+            <key>creditCard</key>
+        </map>
+        <map>
+            <id>10005</id>
+            <key>directDebit</key>
+        </map>
+        <map>
+            <id>10001</id>
+            <key>invoice</key>
+        </map>
+        <map>
+            <id>10018</id>
+            <key>sepa</key>
+        </map>
+        <map>
+            <id>0</id>
+            <key>noPaymentMethod</key>
+        </map>
+        <desc>Registry keys for rendering payment method views in Bill Unit Screen, Payment Methods Screen and  Make payment dialog.Though "paymentTypes" has an entry for "invoice", when this is used in Make Payment Dialog, invoice payment will be ignored while rendering the payment method views</desc>
+    </mapping>
+    <mapping>
+        <key>payment.debit.accountTypes</key>
+        <map>
+            <id>1</id>
+            <key>ACCOUNT_TYPE_CHECKING</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>ACCOUNT_TYPE_SAVINGS</key>
+        </map>
+        <map>
+            <id>3</id>
+            <key>ACCOUNT_TYPE_CORPORATE</key>
+        </map>
+        <desc>Direct Debit Account Types.Note - It requires customizations in the BRM side to add a new accounting type</desc>
+    </mapping>
+    <mapping>
+        <key>paymentMethods.invoice.deliverPreferTypes</key>
+        <map>
+            <id>0</id>
+            <key>EMAIL</key>
+        </map>
+        <map>
+            <id>1</id>
+            <key>POSTAL</key>
+        </map>
+        <desc>Invoice Payment Method Delivery Types.Note - BRM supports "Fax" with the value "2" as a preference type. If customer need it, they can add this map in the CustomConfigurations.xml</desc>
+    </mapping>
+    <mapping>
+        <key>paymentMethods.SEPA.typeOfPayment</key>
+        <map>
+            <id>1</id>
+            <key>RECURRING</key>
+        </map>
+        <map>
+            <id>0</id>
+            <key>ONEOFF</key>
+        </map>        
+        <desc>Mandate type options for creating SEPA payment method</desc>
+    </mapping>
+    <mapping>
+        <key>serviceTypes.icons</key>
+        <map> 
+            <id>serviceIp</id>
+            <key>resources/images/star-shape.png</key>
+        </map>
+        <map>
+            <id>serviceEmail</id>
+            <key>resources/images/star-shape.png</key>
+        </map>
+        <map>
+            <id>accountProduct</id>
+            <key>resources/images/hexagon-shape.png</key>
+        </map>
+        <map>
+            <id>serviceTelcoGsm</id>
+            <key>resources/images/audio-call.png</key>
+        </map>   
+        <map>
+            <id>defaultService</id>
+            <key>resources/images/star-shape.png</key>
+        </map>
+        <desc>Service types icons to be displayed for customer Assets.If no iconKey and icon are provided for any services then default icon will be used.Optimum Image dimension is 116 x 116 pixels</desc>
+    </mapping>
+    <mapping>
+        <key>correctivebill.invoicetypes</key>
+        <map>
+            <id>1</id>
+            <key>INVOICE_CORRECTION_LETTER</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>REPLACEMENT_INVOICE</key>
+        </map>
+        <desc>Invoice Types for Corrective Bill Generation.</desc>
+    </mapping>
+    <mapping>
+        <key>correctivebill.invoiceformats</key>
+        <map>
+            <id>1</id>
+            <key>FORMAT_DETAIL</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>FORMAT_SUMMARY</key>
+        </map>
+        <desc>Invoice Formats for Corrective Bill Generation.</desc>
+    </mapping>
+    <keyvals>
+        <key>accountCreation.tabs</key>
+        <value>
+            [
+             {"key": "generalInfo", "value":{
+                                            "label":"PROFILE",
+                                            "msg":"COMPLETE_PROFILE_THEN",
+                                            "title":"PROFILE_SHORT_DESCRIPTION"
+                                        }
+            },
+            {"key": "accountCreationSelect", "value":{
+                                                    "label":"SELECT",
+                                                    "msg":"SELECT_THEN"
+                                                }
+            },
+            {"key": "accountCreationConfigure", "value": {
+                                                    "label" : "CONFIGURE",
+                                                     "msg" : "COMPLETE_CONFIGURATION_THEN",
+                                                    "title": "CONFIGURE_SHORT_DESCRIPTION"
+                                                }
+            },
+            {"key": "accountCreationTerms", "value": {
+                                                    "label" : "TERMS",
+                                                     "msg" : "COMPLETE_TERM_THEN",
+                                                    "title": "TERM_SHORT_DESCRIPTION"
+                                                }
+            },
+            {"key": "accountCreationPay", "value": {
+                                                    "label" : "PAY",
+                                                     "msg" : "COMPLETE_PAYMENTINFORMATION_THEN",
+                                                    "title": "PAY_SHORT_DESCRIPTION"
+                                                }
+            }
+          ]
+        </value>
+        <desc>Account Creation framework configuration used to render the train stops and labels for the footer.And "key" is also used as registry entry to fetch views/viewmodels for the corresponding train stops</desc>
+    </keyvals>    
+    <keyvals>
+        <key>purchase.tabs</key>
+        <value>
+            [
+                {"key": "purchaseSelection", "value":{
+                                            "label":"SELECT",
+                                            "msg":"SELECT_PURCHASE",
+                                            "title":"SELECT_SHORT_DESCRIPTION"
+                                        }
+                }
+            ,
+                {"key": "purchaseConfiguration", "value": {
+                                                    "label" : "CONFIGURE",
+                                                    "msg" : "COMPLETE_CONFIGURATION_THEN",
+                                                    "title": "CONFIGURE_SHORT_DESCRIPTION",
+                                                    "disabled": true
+                                                }
+                }
+            ,
+                {"key": "purchaseTerms", "value": {
+                                                    "label" : "TERMS",
+                                                     "msg" : "REVIEW_TERMS_THEN",
+                                                    "title": "TERMS_SHORT_DESCRIPTION",
+                                                    "disabled": true
+                                                }
+                }
+            ,
+                {"key": "purchasePayConfiguration", "value": {
+                                                    "label" : "PAY",
+                                                    "msg" : "COMPLETE_PAYMENTINFORMATION_THEN",
+                                                    "title": "PAY_SHORT_DESCRIPTION",
+                                                    "disabled": false
+                                                }
+                }
+            ]
+        </value>
+        <desc>Product Catalogue framework configuration used to render the train stops and labels for the footer.And "key" is also used as registry entry to fetch views/viewmodels for the corresponding train stops</desc>
+    </keyvals>
+    <mapping>
+        <key>product.customization.delayed.reasons</key>
+        <map>
+            <id>2</id>
+            <key>WAITING_FOR_NETWORK_CONFIGURATION</key>
+        </map>
+        <map>
+            <id>4</id>
+            <key>WAITING_FOR_MAINTENANCE</key>
+        </map>
+        <map>
+            <id>1</id>
+            <key>WAITING_FOR_INSTALLATION</key>
+        </map>
+        <desc>Product customization delayed reason with their values</desc>
+    </mapping> 
+    <mapping>
+        <key>billunit.status</key>
+        <map>
+            <id>0</id>
+            <key>DEFUNCT</key>
+        </map>
+        <map>
+            <id>10100</id>
+            <key>ACTIVE</key>
+        </map> 
+        <map>
+            <id>10102</id>
+            <key>INACTIVE</key>
+        </map> 
+        <map>
+            <id>10103</id>
+            <key>CLOSED</key>
+        </map>        
+        <desc>Bill Unit status for collections</desc>
+    </mapping>
+    <mapping>
+        <key>collections.action.status</key>
+        <map>
+            <id>0</id>
+            <key>PENDING</key>
+        </map>
+        <map>
+            <id>1</id>
+            <key>CANCELLED</key>
+        </map> 
+        <map>
+            <id>2</id>
+            <key>COMPLETED</key>
+        </map>             
+        <map>
+            <id>5</id>
+            <key>WAITING_FOR_DEPENDENTS</key>
+        </map>             
+        <desc>Action status for collections</desc>
+    </mapping>
+    <mapping>
+        <key>deferred.action.status</key>
+        <map>
+            <id>0</id>
+            <key>PENDING</key>
+        </map>
+        <map>
+            <id>1</id>
+            <key>DONE</key>
+        </map> 
+        <map>
+            <id>2</id>
+            <key>ERROR</key>
+        </map>             
+        <map>
+            <id>3</id>
+            <key>PENDING_UNDELETABLE</key>
+        </map>             
+        <desc>Status for deferred action</desc>
+    </mapping>
+    <mapping>
+        <key>device.sim.status</key>
+        <map>
+            <id>1</id>
+            <key>NEW</key>
+        </map>
+        <map>
+            <id>2</id>
+            <key>RELEASED</key>
+        </map>            
+        <desc>Default values for state of the device sim, used while associating SIM for telco service</desc>
+    </mapping>   
+    <mapping>
+        <key>device.sim.networkElement</key>
+        <map>
+            <id>sample_network_element_1</id>
+            <key>SAMPLE_NETWORK_ELEMENT_1</key>
+        </map>  
+        <map>
+            <id>sample_network_element_2</id>
+            <key>SAMPLE_NETWORK_ELEMENT_2</key>
+        </map>            
+        <desc>Available wireless network element, used while associating SIM/NUM for telco service</desc>
+    </mapping> 
+    <mapping>
+        <key>device.num.status</key>
+        <map>
+            <id>1</id>
+            <key>NEW</key>
+        </map>     
+        <map>
+            <id>4</id>
+            <key>UNASSIGNED</key>
+        </map>         
+        <desc>Default unassigned states of the device number, used while associating number for telco service</desc>
+    </mapping>  
+    <mapping>
+        <key>device.num.category</key>
+        <map>
+            <id>0</id>
+            <key>NONE</key>
+        </map> 
+        <map>
+            <id>1</id>
+            <key>RESERVED</key>
+        </map>             
+        <desc>Default number categories of device number, used while associating number for telco service</desc>
+    </mapping> 
+    <mapping>
+        <key>device.num.vanity</key>
+        <map>
+            <id>0</id>
+            <key>NONE</key>
+        </map>  
+        <map>
+            <id>1</id>
+            <key>SAMPLE_VANITY_1</key>
+        </map>     
+        <map>
+            <id>2</id>
+            <key>SAMPLE_VANITY_2</key>
+        </map>         
+        <desc>Available vanity for device number, used while associating number for telco service</desc>
+    </mapping> 
+
+    <keyvals>
+        <key>accountCreation.packageList</key>
+        <value>CSR</value>
+        <desc>Specify the name of the package list which contains the packages to be shown during the account creation. Default is "CSR".
+            Other possible values are "default" (which would return the packages from "default-new") or any other custom package list.
+            If package list name is not specified, then the packages from the "default-new" will be displayed.
+        </desc>
+    </keyvals>
+    <keyvals>
+        <key>purchase.packageList</key>
+        <value>default</value>
+        <desc>Specify the name of the package list which contains the packages to be shown during the purchase. Default is "default".
+            Other possible values are "CSR". If package list name is not specified, then the packages from the "default-new" will be displayed.
+        </desc>
+    </keyvals>
+     <keyvals>
+        <key>accountCreation.tagsMapping</key>
+        <value>[{"key": ".*GSM.*|.*[Mm]obile.*", "value":"Mobile"},
+            {"key": ".*[Cc]able.*", "value":"Cable,TV"},
+            {"key": ".*[Ff]iber.*|.*[Ww]eb.*|.*GPRS.*", "value": "Internet"},
+            {"key": ".*[Cc]orporate.*", "value": "Corporate"},
+            {"key": ".*[Tt]ax.*", "value": "Tax"},
+            {"key": "*", "value": "Uncategorized"}]
+        </value>
+        <desc>Mapping for tagging the package. Here key is regular expression to match the package name or "Uncategoried" and value is the tag name. 
+            If a package name matches the regular expression, those packages will be tagged with corresponding tags. 
+            Packages which doesn't match mapping rules would land under "*" pattern value.</desc>
+    </keyvals>
+    <keyvals>
+        <key>purchase.bundleTagsMapping</key>
+        <value>[{"key": ".*GSM.*|.*[Mm]obile.*", "value":"Mobile"},
+            {"key": ".*[Cc]able.*", "value":"Cable,TV"},
+            {"key": ".*[Ff]iber.*|.*[Ww]eb.*|.*GPRS.*", "value": "Internet"},
+            {"key": ".*[Cc]orporate.*", "value": "Corporate"},
+            {"key": ".*[Tt]ax.*", "value": "Tax"},
+            {"key": ".*[Dd]iscount*.", "value": "Discounts"},
+            {"key": ".*[Ii]nternet*.", "value": "Internet"},
+            {"key": "*", "value": "Uncategorized"}]
+        </value>
+        <desc>Mapping for tagging the bundle. Here key is regular expression to match the bundle name or "Uncategoried" and value is the tag name. 
+            If a bundle name matches the regular expression, those bundle will be tagged with corresponding tags. 
+            bundles which don't match mapping rules would land under "*" pattern value.</desc>
+    </keyvals>
+    <keyvals>
+        <key>paymentSuspense.reasonMapping</key>
+        <value>[
+        {"key": ".*[Tt]echnical.*", "value":"Technical", "icon": "resources/images/unable-to-process-icon.png"}
+        ,
+        {"key": ".*[Bb]usiness.*", "value":"Business", "icon": "resources/images/business-rule-match-icon.png"}
+        ,
+        {"key": ".*[Mm]ultiple.*", "value": "Unable to Process", "icon": "resources/images/unable-to-process-icon.png"}
+        ,
+        {"key": "*", "value": "Unclassified", "icon": "resources/images/unable-to-process-icon.png"}
+        ]
+        </value>
+        <desc>Mapping for two-tier suspense reason filtering. Here key is regular expression to match the detailed reason 
+            description and value is the higher level reason. If a reason description matches the regular expression, 
+            those reasons will be grouped with corresponding higher level reason otherwise will be grouped under 
+            "Uncategorized".If icon property is available with resource path corresponding grouped payments shown with it 
+            otherwise "Uncategorized" icons shown by default. Note: keep the "key": "*" as the last entry in the value, as that is the broadest group</desc>
+    </keyvals>    
+    <keyvals>
+        <key>batchPaymentsTabs</key>
+        <value>[{"id": "active", "label": "ACTIVE"},{"id": "history", "label": "HISTORY"}]</value>
+        <desc>Batch Payment Active/History Page tab.</desc>
+    </keyvals>
+    <keyvals>
+        <key>batchPaymentsDateFormat</key>
+        <value>d-MMMM-y</value>
+        <desc>Date format for the batch payments.The default format supports date of formats 23-Mar-16,23-Mar-2016,23-December-16,23-December-2016.
+        Provide a desired supported value for this key as per format of the date entered in batch payment file.
+        The more commonly used patterns can be used by a combination of y (representing a year digit), M (representing a month digit) and d (representing a date digit).</desc>
+    </keyvals>
+    <keyvals>
+        <key>organizationHierarchyTypes</key>
+        <value>
+            [
+            {"key": "site", "value":{"name":"SITE","value": 1,"icon":"resources/images/site.png"}},
+            {"key": "legalEntity", "value":{"name":"LEGAL_ENTITY","value": 2,"icon":"resources/images/legal-entity.png"}},
+            {"key": "billingAccount", "value": {"name" : "BILLING_ACCOUNT","value": 3,"icon" : "resources/images/billing-account.png"}},
+            {"key": "serviceAccount", "value": {"name" : "SERVICE_ACCOUNT","value": 4,"icon" : "resources/images/service-accounts.png"}}
+            ]
+        </value>
+        <desc>Organization Heirarchy types including the name, id and the icon</desc>
+    </keyvals> 
+    <thresholds>
+        <key>balances.services.size</key>
+        <value>4</value>
+        <desc>Threshold value for showing number of services in Balances section.If exceeded, remaining services will be shown/hidden on click of Show More/Less link respectively</desc>
+    </thresholds>
+    <thresholds>
+        <key>assets.servicetypes.size</key>
+        <value>6</value>
+        <desc>Threshold value for showing number of service Types in Assets section.If exceeded, remaining service Types will be shown/hidden on click of Show More/Less link respectively</desc>
+    </thresholds>
+    <keyvals>
+        <key>paymentsuspense.excludedpaymenttypes</key>
+        <value>10003,10005</value>
+        <desc>Comma separated list of payment types to be excluded from the payment suspense flow. By default, Credit Card and Direct Debit payment types (i.e. 10003,10005) 
+            are ignored from payment suspense flow since they are BRM initiated payment types. 
+        </desc>
+    </keyvals>
+    <keyvals>
+        <key>collections.icon</key>
+        <value>[
+        {"key": "*", "value":"resources/images/collections.png"    }    
+        ]
+        </value>
+        <desc></desc>
+    </keyvals>  
+    <keyvals>
+        <key>custom.icon</key>
+        <value>[
+        {"key": "*", "value":"web/custom/images/customm.png"    }    
+        ]
+        </value>
+        <desc></desc>
+    </keyvals>
+    <keyvals>
+        <key>creditlimit.thresholds</key>
+        <value>5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100</value>
+        <desc>Comma separated list of thresholds percentages use in setting credit thresholds for both currency and non currency resources</desc>
+    </keyvals>    
+</configurations>

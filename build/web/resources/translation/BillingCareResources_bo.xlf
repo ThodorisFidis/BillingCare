@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+<file original="test_en.js" source-language="EN-US" target-language="BA" datatype="JavaScript">
+<header/>
+<body>
+    <group id="custom_extensions" restype="sdk">
+        <trans-unit id="print-button" translate="yes">
+        <source>štampa</source>
+        <target>štampa</target>
+        </trans-unit>
+    </group>
+</body>
+</file>
+</xliff>

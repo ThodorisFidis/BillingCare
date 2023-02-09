@@ -1,0 +1,14 @@
+{
+  "type" : "Postal order",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment10015",
+  "internalStruct" : "postalOrderInfo",
+  "fields" : [ {
+    "label" : "Date",
+    "datatype" : "date",
+    "fieldName" : "effectiveDate"
+  }, {
+    "label" : "Order ID",
+    "datatype" : "string",
+    "fieldName" : "orderId"
+  } ]
+}

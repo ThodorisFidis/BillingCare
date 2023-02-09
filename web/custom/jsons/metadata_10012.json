@@ -1,0 +1,22 @@
+{
+  "type" : "Check",
+  "classType" : "com.oracle.communications.brm.cc.model.Externalpayment10012",
+  "internalStruct" : "checkInfo",
+  "fields" : [ {
+    "label" : "Check Date",
+    "datatype" : "date",
+    "fieldName" : "effectiveDate"
+  }, {
+    "label" : "Check Number",
+    "datatype" : "string",
+    "fieldName" : "checkNo"
+  }, {
+    "label" : "Bank Code",
+    "datatype" : "string",
+    "fieldName" : "bankCode"
+  }, {
+    "label" : "Bank Account Number",
+    "datatype" : "string",
+    "fieldName" : "bankAccountNo"
+  } ]
+}
