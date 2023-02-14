@@ -852,7 +852,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
         FList inputFlist = new FList();
 
         try {
-            if (returnedFieldsFromWs.getInvoiceStatus().equals("0") && returnedFieldsFromWs.getInvoiceNumber() != null) {
+            if (returnedFieldsFromWs.getInvoiceStatus().equals("OK") && returnedFieldsFromWs.getInvoiceNumber() != null) {
 
                 //create the input flist
                 Poid poidField = BRMUtility.poidFromRestId(poid);
