@@ -39,6 +39,7 @@ import com.portal.pcm.fields.FldTemplate;
 import com.portal.pcm.fields.FldValidFrom;
 import customfields.BhtFldInstallments;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 
@@ -190,6 +191,13 @@ public class HotBillingWorker extends PCMBaseWorker {
             logger.fine("Output Flist of READ_FLDS : ", fList2);
         
             nextBillDate = fList2.get((TStampField) FldNextBillT.getInst());
+            
+            //substract 1 sec from nextBillDate
+            Calendar c = Calendar.getInstance();
+            c.setTime(nextBillDate);
+            c.add(Calendar.SECOND, -1);
+            nextBillDate = c.getTime();
+            logger.fine("minus 1 sec:" +nextBillDate);
         } else{
             
            nextBillDate = new Date(System.currentTimeMillis()); 

@@ -12,9 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/src/com/oracle/communications/brm/cc/ws/FiscalizationResource.java</file>
-            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/src/com/rest/sdk/FiscalizationModule.java</file>
-            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/src/com/oracle/communications/brm/cc/ws/FiscalizationWorker.java</file>
+            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/src/com/rest/sdk/HotBillingModule.java</file>
+            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/src/com/oracle/communications/brm/cc/ws/HotBillingResource.java</file>
+            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/web/custom/js/templates/customBillNowOverlayView.html</file>
+            <file>file:/C:/Users/t.fidis/Documents/NetBeansProjects/BillingCareCustomizations/src/com/oracle/communications/brm/cc/ws/HotBillingWorker.java</file>
         </group>
     </open-files>
 </project-private>
