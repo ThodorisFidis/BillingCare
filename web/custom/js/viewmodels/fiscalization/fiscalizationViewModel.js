@@ -731,8 +731,10 @@ define(["jquery", "knockout", "underscore", "ojs/ojarraydataprovider", "ojs/ojco
                                         if (n[i].adjustmentType === "Storno") {
                                             n[i].amount = -(n[i].amount);
                                         }
-                                        if (n[i].adjustmentStatus === 0 || n[i].rsSeqNo === 0) {
+                                        if (n[i].adjustmentStatus === 0 && n[i].rsSeqNo === 0) {
                                             var rsSeqNoUI = n[i].rsSeqNo;
+                                        } else if(n[i].adjustmentStatus === 0 && n[i].rsSeqNo !== 0){
+                                            var rsSeqNoUI = " ";
                                         } else {
                                             var rsSeqNoUI = n[i].rsSeqAdjNo;
                                         }

@@ -197,7 +197,6 @@ public class HotBillingWorker extends PCMBaseWorker {
             c.setTime(nextBillDate);
             c.add(Calendar.SECOND, -1);
             nextBillDate = c.getTime();
-            logger.fine("minus 1 sec:" +nextBillDate);
         } else{
             
            nextBillDate = new Date(System.currentTimeMillis()); 
