@@ -393,7 +393,7 @@ public class FiscalizationModule extends PCMModuleBase {
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, sequenceNumber, sequenceNumberAdj);
             } else if (sequenceNumber != 0 && adjustmentStatus == 3) {
                 //get the invoice number
-                returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNo(sequenceNumber);
+                returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNo(sequenceNumberAdj);
                 //update the correction items
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, sequenceNumber, sequenceNumberAdj);
 
@@ -587,7 +587,7 @@ public class FiscalizationModule extends PCMModuleBase {
                 } else if (item.getRsSeqNo() != 0 && item.getAdjustmentStatus() == 3) {
                     
                     //get the invoice number
-                    returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNo(item.getRsSeqNo());                  
+                    returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNo(item.getRsSeqAdjNo());                  
                     //update the correction items
                     fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, item.getDirectorateCode(), item.getTechnologyCode(), item.getTaxCode(), item.getFiscalNumber(), accountingPeriod, item.getAdjustmentType(), item.getAdjustmentStatus(), item.getRsSeqNo(), item.getRsSeqAdjNo());
                     printedItemsNumber += parseInt(fiscalUpdateResults.getMessage());

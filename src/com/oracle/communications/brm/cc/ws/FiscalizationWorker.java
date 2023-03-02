@@ -745,7 +745,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
     }
 
     //this method returns the printer id
-    public FiscalPrinterResultFields getFiscalNumberForRSBySeqNo(int sequenceNumber) throws ParserConfigurationException {
+    public FiscalPrinterResultFields getFiscalNumberForRSBySeqNo(int sequenceNumberAdj) throws ParserConfigurationException {
         logger.entering("FiscalizationWorker", "getFiscalNumberForRSBySeqNo");
         FiscalPrinterResultFields fiscalPrinterResultFields = new FiscalPrinterResultFields();
         try {
@@ -765,7 +765,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
                     + "   <soapenv:Body>\n"
                     + "      <com:GetFiscalNumberByRSseqNo>\n"
                     + "         <!--Optional:-->\n"
-                    + "         <rsSeqNo>" + sequenceNumber + "</rsSeqNo>\n"
+                    + "         <rsSeqNo>" + sequenceNumberAdj + "</rsSeqNo>\n"
                     + "      </com:GetFiscalNumberByRSseqNo>\n"
                     + "   </soapenv:Body>\n"
                     + "</soapenv:Envelope>";
