@@ -376,11 +376,11 @@ public class FiscalizationModule extends PCMModuleBase {
                 String description = fields.get(1);
                 String orderNumber = fields.get(2);
                 //String userCode = fields.get(3);
-                
+
                 //calling the ws to get printer id
                 List<String> printerIdAndEndpoint = fiscalWorker.getPrinterIdEndpointFromWs(directorateCode, technologyCode);
                 String cashRegisterId = printerIdAndEndpoint.get(0);
-                
+
                 int typeOfRequest = 0;
                 if (adjustmentType.equals("Storno")) {
                     typeOfRequest = 2;
@@ -392,13 +392,19 @@ public class FiscalizationModule extends PCMModuleBase {
                 //invoke update opcode for the correction items
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, sequenceNumber, sequenceNumberAdj);
             } else if (sequenceNumber != 0 && adjustmentStatus == 3) {
+
+                int typeOfRequest = 0;
+                if (adjustmentType.equals("Storno")) {
+                    typeOfRequest = 2;
+                }
+
                 //get the invoice number
-                returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNo(sequenceNumberAdj);
+                returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNoForCorrections(sequenceNumberAdj, typeOfRequest);
                 //update the correction items
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, sequenceNumber, sequenceNumberAdj);
 
             } else if (sequenceNumber == 0 && processingStage == 1) {
-                 //find required information of fiscalized items
+                //find required information of fiscalized items
                 List<String> fields = fiscalWorker.getIndividualItemInformationForCorrectionPrint(itemObj);
                 String glId = fields.get(0);
                 String description = fields.get(1);
@@ -411,14 +417,14 @@ public class FiscalizationModule extends PCMModuleBase {
                     typeOfRequest = 2;
                 }
 
-                 //call web service in order to get the fiscal number
+                //call web service in order to get the fiscal number
                 returnedFieldsFromWs = fiscalWorker.printIndividualFiscalizationInvoiceForCorrections(amount, taxCode, glId, description, printerId, typeOfRequest);
 
                 //invoke update opcode for the correction items
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, sequenceNumber, sequenceNumberAdj);
 
             } else if (sequenceNumber == 0 && processingStage == 2) {
-                 //find required information of fiscalized items
+                //find required information of fiscalized items
                 List<String> printerIdAndEndpoint = fiscalWorker.getPrinterIdEndpointFromWs(directorateCode, technologyCode);
                 String printerId = printerIdAndEndpoint.get(0);
                 String endpoint = printerIdAndEndpoint.get(1);
@@ -429,7 +435,7 @@ public class FiscalizationModule extends PCMModuleBase {
                     typeOfRequest = 2;
                 }
 
-                 //call web service in order to get the fiscal number
+                //call web service in order to get the fiscal number
                 returnedFieldsFromWs = fiscalWorker.printGroupedCorrectionsFiscalizationInvoice(amount, taxCode, description, endpoint, typeOfRequest);
 
                 //invoke update opcode for the correction items
@@ -472,12 +478,11 @@ public class FiscalizationModule extends PCMModuleBase {
                 String description = fields.get(1);
                 String orderNumber = fields.get(2);
                 //String userCode = fields.get(3);
-                
-                
+
                 //calling the ws to get printer id
                 List<String> printerIdAndEndpoint = fiscalWorker.getPrinterIdEndpointFromWs(directorateCode, technologyCode);
                 String cashRegisterId = printerIdAndEndpoint.get(0);
-                
+
                 int typeOfRequest = 0;
                 if (adjustmentType.equals("Povećanje")) {
                     typeOfRequest = 2;
@@ -488,7 +493,7 @@ public class FiscalizationModule extends PCMModuleBase {
 
                 //invoke update opcode for cancel duplicate action
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcodeForCancelDuplicate(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, adjFiscalNumber, sequenceNumber, sequenceNumberAdj);
-           
+
             } else if (sequenceNumber == 0 && processingStage == 1) { //processing stage = 1 means that is individual fiscalized
                 List<String> fields = fiscalWorker.getIndividualItemInformationForCorrectionPrint(itemObj);
                 String glId = fields.get(0);
@@ -503,7 +508,7 @@ public class FiscalizationModule extends PCMModuleBase {
                 }
                 //call the web service for printing the individual correction record
                 returnedFieldsFromWs = fiscalWorker.printIndividualFiscalizationInvoiceForCorrections(amount, taxCode, glId, description, printerId, typeOfRequest);
-                
+
                 //invoke update opcode for cancel duplicate action
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcodeForCancelDuplicate(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, adjFiscalNumber, sequenceNumber, sequenceNumberAdj);
 
@@ -517,15 +522,14 @@ public class FiscalizationModule extends PCMModuleBase {
                 if (adjustmentType.equals("Povećanje")) {
                     typeOfRequest = 2;
                 }
-                
+
                 //call the web service for printing the grouped correction record
                 returnedFieldsFromWs = fiscalWorker.printGroupedCorrectionsFiscalizationInvoice(amount, taxCode, description, endpoint, typeOfRequest);
-                
+
                 //update the corrected items
                 fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcodeForCancelDuplicate(returnedFieldsFromWs, directorateCode, technologyCode, taxCode, fiscalNumber, accountingPeriod, adjustmentType, adjustmentStatus, adjFiscalNumber, sequenceNumber, sequenceNumberAdj);
 
             }
-
 
             logger.exiting("FiscalizationModule", "cancelDuplicateCorrectionsFiscalizationRecords");
             return fiscalUpdateResults;
@@ -570,7 +574,7 @@ public class FiscalizationModule extends PCMModuleBase {
                     String description = fields.get(1);
                     String orderNumber = fields.get(2);
                     //String userCode = fields.get(3);
-                    
+
                     //calling the ws to get printer id
                     List<String> printerIdAndEndpoint = fiscalWorker.getPrinterIdEndpointFromWs(item.getDirectorateCode(), item.getTechnologyCode());
                     String cashRegisterId = printerIdAndEndpoint.get(0);
@@ -583,15 +587,20 @@ public class FiscalizationModule extends PCMModuleBase {
 
                     fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, item.getDirectorateCode(), item.getTechnologyCode(), item.getTaxCode(), item.getFiscalNumber(), accountingPeriod, item.getAdjustmentType(), item.getAdjustmentStatus(), item.getRsSeqNo(), item.getRsSeqAdjNo());
                     printedItemsNumber += parseInt(fiscalUpdateResults.getMessage());
-                    
+
                 } else if (item.getRsSeqNo() != 0 && item.getAdjustmentStatus() == 3) {
                     
+                    int typeOfRequest = 0;
+                    if (item.getAdjustmentType().equals("Storno")) {
+                        typeOfRequest = 2;
+                    }
+
                     //get the invoice number
-                    returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNo(item.getRsSeqAdjNo());                  
+                    returnedFieldsFromWs = fiscalWorker.getFiscalNumberForRSBySeqNoForCorrections(item.getRsSeqAdjNo(), typeOfRequest);
                     //update the correction items
                     fiscalUpdateResults = fiscalWorker.invokeFiscalUpdateAdjFiscalNoOpcode(returnedFieldsFromWs, item.getDirectorateCode(), item.getTechnologyCode(), item.getTaxCode(), item.getFiscalNumber(), accountingPeriod, item.getAdjustmentType(), item.getAdjustmentStatus(), item.getRsSeqNo(), item.getRsSeqAdjNo());
                     printedItemsNumber += parseInt(fiscalUpdateResults.getMessage());
-                    
+
                 } else if (item.getRsSeqNo() == 0 && item.getProcessingStage() == 1) {
                     List<String> fields = fiscalWorker.getIndividualItemInformationForCorrectionPrint(item.getItemObj());
                     String glId = fields.get(0);

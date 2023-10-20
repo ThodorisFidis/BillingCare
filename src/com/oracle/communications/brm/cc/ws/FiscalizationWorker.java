@@ -428,8 +428,8 @@ public class FiscalizationWorker extends PCMBaseWorker {
                             logger.severe("FiscalizationWorker, printer id has null value ");
                             ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), "application couldn't find all information needed, printer id has null value", new Object[0]);
                         }
-                        
-                    } 
+
+                    }
 
                     arrayListOfEntries.add(individualFiscalizationFields);
                     individualFiscalizationFields = new IndividualFiscalizationFields();
@@ -528,7 +528,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response is == \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "get:";
@@ -538,7 +538,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
                 printerID = err.getElementsByTagName(prefix + "FGET_PRINTER_ID").item(0).getTextContent();
                 logger.severe("PrinterID is" + printerID);
             }*/
-            
             NodeList errNodes = doc.getElementsByTagName("get:OutputParameters");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -641,7 +640,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response == \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "typ:";
@@ -652,7 +651,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
                 fiscalPrinterResultFields.setInvoiceStatus(err.getElementsByTagName(prefix + "InvoiceStatus").item(0).getTextContent());
                 fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName(prefix + "ErrorMessage").item(0).getTextContent());
             }*/
-            
             NodeList errNodes = doc.getElementsByTagName("typ:printInvoiceOutputElement");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -717,8 +715,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response == \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "get:";
@@ -726,7 +723,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
                 endpoint = err.getElementsByTagName(prefix + "FGET_ENDPOINT4PRINTER_ID").item(0).getTextContent(); */
-            
             NodeList errNodes = doc.getElementsByTagName("get:OutputParameters");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -744,7 +740,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
         return endpoint;
     }
 
-    //this method returns the printer id
     public FiscalPrinterResultFields getFiscalNumberForRSBySeqNo(int sequenceNumberAdj) throws ParserConfigurationException {
         logger.entering("FiscalizationWorker", "getFiscalNumberForRSBySeqNo");
         FiscalPrinterResultFields fiscalPrinterResultFields = new FiscalPrinterResultFields();
@@ -1332,7 +1327,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response: \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "get:";
@@ -1341,7 +1336,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
                 Element err = (Element) errNodes.item(0);
                 resultsList.add(err.getElementsByTagName(prefix + "V_PRINTER_ID").item(0).getTextContent());
                 resultsList.add(err.getElementsByTagName(prefix + "V_ENDPOINT").item(0).getTextContent()); */
-            
             NodeList errNodes = doc.getElementsByTagName("get:OutputParameters");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -1472,7 +1466,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response: \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "typ:";
@@ -1483,8 +1477,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
                 fprf.setErrorMessage(err.getElementsByTagName(prefix + "ErrorMessage").item(0).getTextContent());
                 fprf.setInvoiceStatus(err.getElementsByTagName(prefix + "InvoiceStatus").item(0).getTextContent());
             } */
-            
-            
             NodeList errNodes = doc.getElementsByTagName("typ:printInvoiceOutputElement");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -1732,10 +1724,10 @@ public class FiscalizationWorker extends PCMBaseWorker {
             adjustmentInfoSubArray.set(BhtFldAccountingPeriod.getInst(), accountingPeriod);
             adjustmentInfoSubArray.set(BhtFldFscAdjStatus.getInst(), 0);
             adjustmentInfoSubArray.set(FldAdjustmentType.getInst(), correctionsFiscalizationWriteFields.getAdjustmentType());
-            if(correctionsFiscalizationWriteFields.getAdjustmentType() == 1){
-                  adjustmentInfoSubArray.set(BhtFldFiscalNo.getInst());
-            }else{
-                 adjustmentInfoSubArray.set(BhtFldFiscalNo.getInst(),correctionsFiscalizationWriteFields.getFiscalNo());
+            if (correctionsFiscalizationWriteFields.getAdjustmentType() == 1) {
+                adjustmentInfoSubArray.set(BhtFldFiscalNo.getInst());
+            } else {
+                adjustmentInfoSubArray.set(BhtFldFiscalNo.getInst(), correctionsFiscalizationWriteFields.getFiscalNo());
             }
             adjustmentInfoSubArray.set(FldAmount.getInst(), correctionsFiscalizationWriteFields.getAmount());
             inputFlistForWriteFields.setElement(FldAdjustmentInfo.getInst(), ELEMID_ASSIGN, adjustmentInfoSubArray);
@@ -1867,26 +1859,24 @@ public class FiscalizationWorker extends PCMBaseWorker {
                                 correctionsUIFields.setAdjustmentStatus((FldAdjustmentInfoValues.get(BhtFldFscAdjStatus.getInst())));
                                 correctionsUIFields.setAmount(FldAdjustmentInfoValues.get(FldAmount.getInst()));
                                 correctionsUIFields.setAdjFiscalNumber(FldAdjustmentInfoValues.get(BhtFldFscAdjNo.getInst()));
-                                if(FldAdjustmentInfoValues.get(FldAdjustmentType.getInst()) == 1){
+                                if (FldAdjustmentInfoValues.get(FldAdjustmentType.getInst()) == 1) {
                                     correctionsUIFields.setFiscalNumber(FldAdjustmentInfoValues.get(BhtFldFiscalNo.getInst()));
                                 }
                                 //if(correctionsUIFields.getAdjustmentStatus() != 0 && correctionsDataInformationFlist.get((IntField) BhtFldRsSeqNo.getInst()) != 0){
-                                     correctionsUIFields.setRsSeqAdjNo(FldAdjustmentInfoValues.get((IntField) BhtFldRsSeqAdjNo.getInst()));
-                                    
-                                
+                                correctionsUIFields.setRsSeqAdjNo(FldAdjustmentInfoValues.get((IntField) BhtFldRsSeqAdjNo.getInst()));
+
                             }
                         }
                     }
-                    if(correctionsUIFields.getAdjustmentType().equals("-1")){
-                       correctionsUIFields.setFiscalNumber(correctionsDataInformationFlist.get(BhtFldFiscalNo.getInst()));
+                    if (correctionsUIFields.getAdjustmentType().equals("-1")) {
+                        correctionsUIFields.setFiscalNumber(correctionsDataInformationFlist.get(BhtFldFiscalNo.getInst()));
                     }
                     correctionsUIFields.setProcessingStage(correctionsDataInformationFlist.get(FldProcessingStage.getInst()));
                     correctionsUIFields.setItemObj(BRMUtility.restIdFromPoid(correctionsDataInformationFlist.get((PoidField) FldItemObj.getInst())));
                     correctionsUIFields.setDirectorateCode(correctionsDataInformationFlist.get((StrField) BhtFldDirectorateCode.getInst()));
                     correctionsUIFields.setTechnologyCode(correctionsDataInformationFlist.get((StrField) BhtFldTechnologyCode.getInst()));
                     correctionsUIFields.setTaxCode(correctionsDataInformationFlist.get(FldTaxCode.getInst()));
-                    correctionsUIFields.setRsSeqNo(correctionsDataInformationFlist.get((IntField) BhtFldRsSeqNo.getInst())); 
-
+                    correctionsUIFields.setRsSeqNo(correctionsDataInformationFlist.get((IntField) BhtFldRsSeqNo.getInst()));
 
                     listOfCorrectionsItems.add(correctionsUIFields); //add the object in the list
                     correctionsUIFields = new CorrectionsUIFields();
@@ -2068,9 +2058,9 @@ public class FiscalizationWorker extends PCMBaseWorker {
             correctionsUIFields.setFiscalNumber((String) listOfHashMapKeyValues.get(5));
             int rsSeqNo = (Integer) listOfHashMapKeyValues.get(6);
             correctionsUIFields.setRsSeqNo(rsSeqNo);
-            
+
             //adding the GroupedFiscalizedFields object into arraylist:
-            arrayListOfCorrectionsData.add(correctionsUIFields); 
+            arrayListOfCorrectionsData.add(correctionsUIFields);
         }
 
         logger.exiting("FiscalizationWorker", "getCorrectionsItems");
@@ -2231,7 +2221,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response == \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "typ:";
@@ -2241,7 +2231,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
                 fiscalPrinterResultFields.setInvoiceNumber(err.getElementsByTagName(prefix + "InvoiceNumber").item(0).getTextContent());
                 fiscalPrinterResultFields.setInvoiceStatus(err.getElementsByTagName(prefix + "InvoiceStatus").item(0).getTextContent());
                 fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName(prefix + "ErrorMessage").item(0).getTextContent()); */
-            
             NodeList errNodes = doc.getElementsByTagName("typ:printInvoiceOutputElement");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -2337,7 +2326,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
             in.close();
             logger.severe("Web service response: \n" + response.toString());
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
-            
+
             /*String prefix = "";
             if (BRMUtility.getPropertyValue("ENVIRONMENT").equals("BST") || BRMUtility.getPropertyValue("ENVIRONMENT").equals("BRM2"))
                 prefix = "typ:";
@@ -2348,7 +2337,6 @@ public class FiscalizationWorker extends PCMBaseWorker {
                 fprf.setErrorMessage(err.getElementsByTagName(prefix + "ErrorMessage").item(0).getTextContent());
                 fprf.setInvoiceStatus(err.getElementsByTagName(prefix + "InvoiceStatus").item(0).getTextContent());
             } */
-            
             NodeList errNodes = doc.getElementsByTagName("typ:printInvoiceOutputElement");
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
@@ -2375,7 +2363,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
         int adjustmentTypeConverted;
         long dbNumber = getCurrentDB();
         FiscalUpdateResults fiscalUpdateResultsList = new FiscalUpdateResults();
-        
+
         if (adjustmentType.equals("Storno")) {
             adjustmentTypeConverted = -1;
         } else {
@@ -2386,7 +2374,7 @@ public class FiscalizationWorker extends PCMBaseWorker {
         if (returnedFieldsFromWs.getInvoiceNumber().equals("-1")) {
             adjustmentStatus = 2;
         }
-        
+
         boolean flag = false;
         //in case status 3, it means that is processed without fiscal number
         if (adjustmentStatus == 3) {
@@ -2402,23 +2390,22 @@ public class FiscalizationWorker extends PCMBaseWorker {
             inputFlist.set(FldTaxCode.getInst(), taxCode);
             inputFlist.set(FldAdjustmentType.getInst(), adjustmentTypeConverted);
             inputFlist.set(BhtFldRsSeqNo.getInst(), sequenceNumber);
-            
-            if(returnedFieldsFromWs.getInvoiceNumber().equals("-1")){
+
+            if (returnedFieldsFromWs.getInvoiceNumber().equals("-1")) {
                 inputFlist.set(BhtFldFscAdjNo.getInst(), "");
                 inputFlist.set((StrField) BhtFldFiscalNo.getInst(), fiscalNumber);
-            } 
-            else if ( adjustmentTypeConverted == 1) {
+            } else if (adjustmentTypeConverted == 1) {
                 inputFlist.set(BhtFldFscAdjNo.getInst(), "");
                 inputFlist.set((StrField) BhtFldFiscalNo.getInst(), returnedFieldsFromWs.getInvoiceNumber());
-            } else if(adjustmentTypeConverted == -1){
+            } else if (adjustmentTypeConverted == -1) {
                 inputFlist.set((StrField) BhtFldFiscalNo.getInst(), fiscalNumber);
                 inputFlist.set(BhtFldFscAdjNo.getInst(), returnedFieldsFromWs.getInvoiceNumber());
-            }  
+            }
             inputFlist.set(BhtFldFscAdjStatus.getInst(), adjustmentStatus + 1);
-            if(sequenceNumber != 0 && flag == false){
+            if (sequenceNumber != 0 && flag == false) {
                 inputFlist.set(BhtFldRsSeqAdjNo.getInst(), Integer.parseInt(returnedFieldsFromWs.getNewSequenceNumber()));
-            }else{
-                 inputFlist.set(BhtFldRsSeqAdjNo.getInst(), sequenceNumberAdj);
+            } else {
+                inputFlist.set(BhtFldRsSeqAdjNo.getInst(), sequenceNumberAdj);
             }
             logger.fine("input flist for update corrections adj fiscal number is: \n" + inputFlist);
 
@@ -2610,11 +2597,11 @@ public class FiscalizationWorker extends PCMBaseWorker {
                     + "         <!--Optional:-->\n"
                     + "         <quantity>1</quantity>\n"
                     + "         <typeOfRequest>" + typeOfRequest + "</typeOfRequest>\n";
-            if(typeOfRequest == 2){
-                isDecreaseCorrection = "<billNumberForCancellation>"+fiscalNumber+"</billNumberForCancellation>\n";
+            if (typeOfRequest == 2) {
+                isDecreaseCorrection = "<billNumberForCancellation>" + fiscalNumber + "</billNumberForCancellation>\n";
             }
-            String xml = xml2 + isDecreaseCorrection + 
-                     "      </com:PrintFiscalBill>\n"
+            String xml = xml2 + isDecreaseCorrection
+                    + "      </com:PrintFiscalBill>\n"
                     + "   </soapenv:Body>\n"
                     + "</soapenv:Envelope>";
 
@@ -2639,19 +2626,37 @@ public class FiscalizationWorker extends PCMBaseWorker {
             if (errNodes.getLength() > 0) {
                 Element err = (Element) errNodes.item(0);
                 fiscalPrinterResultFields.setInvoiceStatus(err.getElementsByTagName("statusCode").item(0).getTextContent());
-                if (fiscalPrinterResultFields.getInvoiceStatus().equals("0")) {
-                    if (err.getElementsByTagName("numFiscBill").item(0) != null) {
-                        fiscalPrinterResultFields.setInvoiceStatus("OK");
-                        fiscalPrinterResultFields.setInvoiceNumber(err.getElementsByTagName("numFiscBill").item(0).getTextContent());
-                        fiscalPrinterResultFields.setNewSequenceNumber(err.getElementsByTagName("seqNumRS").item(0).getTextContent());
+                if (typeOfRequest == 2) { // case for decrease correction for RS
+                    if (fiscalPrinterResultFields.getInvoiceStatus().equals("0")) {
+                        if ((err.getElementsByTagName("numFiscBill").item(0) != null) && (err.getElementsByTagName("numFiscBillWhenCancelled").item(0) != null)) {
+                            fiscalPrinterResultFields.setInvoiceStatus("OK");
+                            fiscalPrinterResultFields.setInvoiceNumber(err.getElementsByTagName("numFiscBill").item(0).getTextContent());
+                            fiscalPrinterResultFields.setNewSequenceNumber(err.getElementsByTagName("seqNumRS").item(0).getTextContent());
+                        } else {
+                            fiscalPrinterResultFields.setInvoiceStatus("OK");
+                            fiscalPrinterResultFields.setInvoiceNumber("-1");
+                            fiscalPrinterResultFields.setNewSequenceNumber(err.getElementsByTagName("seqNumRS").item(0).getTextContent());
+                        }
+
                     } else {
-                        fiscalPrinterResultFields.setInvoiceStatus("OK");
-                        fiscalPrinterResultFields.setInvoiceNumber("-1");
-                        fiscalPrinterResultFields.setNewSequenceNumber(err.getElementsByTagName("seqNumRS").item(0).getTextContent());
-                        logger.info("invoice number = " + fiscalPrinterResultFields.getInvoiceNumber());
+                        fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName("statusDesc").item(0).getTextContent());
                     }
-                } else {
-                    fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName("statusDesc").item(0).getTextContent());
+
+                } else { // case for increase correction for RS
+
+                    if (fiscalPrinterResultFields.getInvoiceStatus().equals("0")) {
+                        if (err.getElementsByTagName("numFiscBill").item(0) != null) {
+                            fiscalPrinterResultFields.setInvoiceStatus("OK");
+                            fiscalPrinterResultFields.setInvoiceNumber(err.getElementsByTagName("numFiscBill").item(0).getTextContent());
+                            fiscalPrinterResultFields.setNewSequenceNumber(err.getElementsByTagName("seqNumRS").item(0).getTextContent());
+                        } else {
+                            fiscalPrinterResultFields.setInvoiceStatus("OK");
+                            fiscalPrinterResultFields.setInvoiceNumber("-1");
+                            fiscalPrinterResultFields.setNewSequenceNumber(err.getElementsByTagName("seqNumRS").item(0).getTextContent());
+                        }
+                    } else {
+                        fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName("statusDesc").item(0).getTextContent());
+                    }
                 }
 
             }
@@ -2667,6 +2672,92 @@ public class FiscalizationWorker extends PCMBaseWorker {
         }
 
         logger.exiting("FiscalizationWorker", "printFiscalBillForRS");
+        return fiscalPrinterResultFields;
+    }
+
+    public FiscalPrinterResultFields getFiscalNumberForRSBySeqNoForCorrections(int sequenceNumberAdj, int typeOfRequest) throws ParserConfigurationException {
+        logger.entering("FiscalizationWorker", "getFiscalNumberForRSBySeqNo");
+        FiscalPrinterResultFields fiscalPrinterResultFields = new FiscalPrinterResultFields();
+        try {
+            Properties prop = new Properties();
+            InputStream ip = getClass().getClassLoader().getResourceAsStream("custom/conf.properties");
+            prop.load(ip);
+            String url = prop.getProperty("getFiscalNumberByRSseqNoUrl");
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setConnectTimeout(40000);
+            con.setReadTimeout(40000);
+            con.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
+            //con.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
+            String xml = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:com=\"http://com/\">\n"
+                    + "   <soapenv:Header/>\n"
+                    + "   <soapenv:Body>\n"
+                    + "      <com:GetFiscalNumberByRSseqNo>\n"
+                    + "         <!--Optional:-->\n"
+                    + "         <rsSeqNo>" + sequenceNumberAdj + "</rsSeqNo>\n"
+                    + "      </com:GetFiscalNumberByRSseqNo>\n"
+                    + "   </soapenv:Body>\n"
+                    + "</soapenv:Envelope>";
+            logger.severe("The sent xml in order to get the fiscal number from RS is == \n" + xml);
+            con.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(xml);
+            wr.flush();
+            wr.close();
+            String responseStatus = con.getResponseMessage();
+            logger.severe("Response status: " + responseStatus);
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            logger.severe("Web service GetFiscalNumberByRSseqNo response is: \n" + response.toString());
+            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(response.toString())));
+            NodeList errNodes = doc.getElementsByTagName("return");
+            if (errNodes.getLength() > 0) {
+                Element err = (Element) errNodes.item(0);
+                fiscalPrinterResultFields.setInvoiceStatus(err.getElementsByTagName("statusCode").item(0).getTextContent());
+                if (typeOfRequest == 2) {
+                    if (fiscalPrinterResultFields.getInvoiceStatus().equals("0") && err.getElementsByTagName("numFiscBillWhenCancelled").item(0) != null ) {
+                        if (err.getElementsByTagName("numFiscBill").item(0) != null) {
+                            fiscalPrinterResultFields.setInvoiceNumber(err.getElementsByTagName("numFiscBill").item(0).getTextContent());
+                            fiscalPrinterResultFields.setInvoiceStatus("OK");
+                        } else {
+                            //ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), "the web service getFiscalNumberByRSseqNo didn't return a fiscal number", new Object[0]);
+                            fiscalPrinterResultFields.setErrorMessage("the web service getFiscalNumberByRSseqNo didn't return a fiscal number");
+                        }
+                    } else if (fiscalPrinterResultFields.getInvoiceStatus().equals("1")) {
+                        fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName("statusDesc").item(0).getTextContent());
+                    }
+                } else {
+                    if (fiscalPrinterResultFields.getInvoiceStatus().equals("0")) {
+                        if (err.getElementsByTagName("numFiscBill").item(0) != null) {
+                            fiscalPrinterResultFields.setInvoiceNumber(err.getElementsByTagName("numFiscBill").item(0).getTextContent());
+                            fiscalPrinterResultFields.setInvoiceStatus("OK");
+                        } else {
+                            //ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), "the web service getFiscalNumberByRSseqNo didn't return a fiscal number", new Object[0]);
+                            fiscalPrinterResultFields.setErrorMessage("the web service getFiscalNumberByRSseqNo didn't return a fiscal number");
+                        }
+                    } else if (fiscalPrinterResultFields.getInvoiceStatus().equals("1")) {
+                        fiscalPrinterResultFields.setErrorMessage(err.getElementsByTagName("statusDesc").item(0).getTextContent());
+                    }
+                }
+
+            } else {
+                ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), "the web service getFiscalNumberByRSseqNo didn't return the return parameters", new Object[0]);
+            }
+        } catch (java.net.SocketTimeoutException e) {
+            logger.severe("FiscalizationWorker, there was a timeout while calling the web service getFiscalNumberByRSseqNo", e);
+            ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), "the web service getFiscalNumberByRSseqNo didn't bring a response, exception timeout ", new Object[0]);
+        } catch (SAXException | IOException e) {
+            logger.severe("FiscalizationWorker, error while calling the web service getFiscalNumberByRSseqNo", e);
+            ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), "the web service getFiscalNumberByRSseqNo didn't bring a valid response ", new Object[0]);
+        }
+
+        logger.exiting("FiscalizationWorker", "getFiscalNumberForRSBySeqNo");
         return fiscalPrinterResultFields;
     }
 

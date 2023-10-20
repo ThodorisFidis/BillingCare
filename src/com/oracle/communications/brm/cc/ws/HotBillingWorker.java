@@ -37,6 +37,7 @@ import com.portal.pcm.fields.FldResults;
 import com.portal.pcm.fields.FldStatus;
 import com.portal.pcm.fields.FldTemplate;
 import com.portal.pcm.fields.FldValidFrom;
+import com.portal.pcm.fields.FldVirtualT;
 import customfields.BhtFldInstallments;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -169,8 +170,8 @@ public class HotBillingWorker extends PCMBaseWorker {
     //This method invokes the InstallmentChargeInstallment opcode for every installment
     public void callOpcodeForIncludeAllInstallments(ArrayList<Poid> installmentPlans, String id, boolean nextBillingDate) throws EBufException {
         logger.entering("HotBillingWorker", "callOpcodeForIncludeAllInstallments");
-        
-        Date nextBillDate;
+        long dbNumber = getCurrentDB();
+        Date nextBillDate = null;
         
         //search for field FldEndT
         if(nextBillingDate){
@@ -197,9 +198,23 @@ public class HotBillingWorker extends PCMBaseWorker {
             c.setTime(nextBillDate);
             c.add(Calendar.SECOND, -1);
             nextBillDate = c.getTime();
-        } else{
             
-           nextBillDate = new Date(System.currentTimeMillis()); 
+        } else{
+           
+            FList getVirtualTimeFList = new FList();
+            Poid poid = new Poid(dbNumber, -1L, "/");
+            getVirtualTimeFList.set((PoidField) FldPoid.getInst(), poid);
+            try {
+                FList getVirtualTimeOutputFList = opcode(38, getVirtualTimeFList);
+                logger.fine("get virtual time opcode result:", getVirtualTimeOutputFList);
+
+                nextBillDate = getVirtualTimeOutputFList.get(FldVirtualT.getInst());
+
+            } catch (EBufException ex) {
+                logger.severe("HotBillingWorker, Problem while invoking the virtual time opcodes", ex);
+                ExceptionHelper.buildErrorInfo(ErrorConstants.ERROR_PROCESSING_TEMPLATE.errorCode(), ex.toString(), new Object[0]);
+            }
+            //nextBillDate = new Date(System.currentTimeMillis()); 
         }
 
         
